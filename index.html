@@ -1,0 +1,495 @@
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- end html metadata -->
+
+    <title>SDCampE</title>
+    <!-- end title -->
+
+    <meta name="description" content="Simulador de campo eletrico">
+    <meta name="author" content="Douglas Lohmann">
+    <!-- end metadata -->
+
+    <link href="view/css/bootstrap.min.css" rel="stylesheet">
+    <link href="view/css/style.css" rel="stylesheet">
+
+    <!-- end import styles -->
+
+  </head>
+  <!-- end ".head" -->
+
+  <body>
+    <div class="container-fluid">
+      <div id="headerPage" class="row">
+        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+          <div style="float: left;">
+            <a href="home_page/home.html" target="_blank">
+                    <span class="glyphicon glyphicon-globe glyphiColor">&nbsp;</span>
+            </a>
+           </div>
+        </div>
+        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-6">
+          <div style="float: center;">
+                <p id="textSD" class="text-center"><strong>SDCampE</strong></p>
+          </div>
+        </div>
+        <div class="col-lg-1 col-md-2 col-sm-2 col-xs-4">
+          <div>
+            <a id="setConf" onclick="show_set_configuration();">
+                    <span class="glyphicon glyphicon-cog glyphiColor">&nbsp;</span>
+                </a>
+                <a onclick="_open_help();">
+                    <span class="glyphicon glyphicon-question-sign glyphiColor"></span>
+                </a>
+              </div>
+        </div>
+      </div>
+      <!-- end ".headerPage" -->
+
+      <div id="bodySD" class="row">
+        <div id="objects" class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+          <!-- <h2>Vertical Button Group</h2> -->
+            <h1 align="center">Ponto</h1>
+          <button id="bCharge" onclick="_addCharge();" class="btn btn-default btn-xs">
+            <img class="img-responsive" src="view/img/dotTest.png" alt="Chania" width="460" height="345">
+          </button>
+            <h1 align="center">Objetos</h1>
+          <div class="space"></div> 
+          <button id="bDot" onclick="_addDot();" class="btn btn-default btn-xs">
+            <img class="img-responsive" src="view/img/dot.png" alt="Chania" width="460" height="345">
+          </button>
+          <div class="space"></div> 
+          <button id="bRing" onclick="_addRing();" class="btn btn-default btn-xs">
+            <img class="img-responsive" src="view/img/anel.png" alt="Chania" width="460" height="345">
+          </button>
+          <div class="space"></div> 
+          <button id="bLine" onclick="_addLine();" class="btn btn-default btn-xs">
+            <img class="img-responsive" src="view/img/line.png" alt="Chania" width="460" height="345">
+          </button>
+          <div class="space"></div> 
+          <button id="bDisc" onclick="_addDisc();" class="btn btn-default btn-xs">
+            <img class="img-responsive" src="view/img/disck.png" alt="Chania" width="460" height="345">
+          </button>
+          <div class="space"></div>
+            <h1 align="center">v 2.0.0</h1>
+        </div>
+        <!-- end ".objects" -->
+        <div id="webGl" class="col-lg-10 col-md-10 col-sm-8 col-xs-8">
+        </div>
+        <!-- end ".webGl" -->
+
+        <div id="variables" class="col-lg-1 col-md-1 col-sm-2 col-xs-2">
+          <h1 align="center">Vari&aacute;veis</h1>
+          <button id="bField" onclick="_calcField();" class="btn btn-default btn-xs">
+            <img class="img-responsive" src="view/img/field.png" alt="Chania" width="460" height="345">
+          </button>
+          <div class="space"></div>
+          <button id="bPot" onclick="_calcPot();" class="btn btn-default btn-xs">
+            <img class="img-responsive" src="view/img/potential.png" alt="Chania" width="460" height="345">
+          </button>
+          <div class="space"></div>
+          <button id="bForce" onclick="_calcForce();" class="btn btn-default btn-xs">
+            <img class="img-responsive" src="view/img/force.png" alt="Chania" width="460" height="345">
+          </button>
+          <div class="space"></div>
+          <button id="bJob" onclick="_calcJob();" class="btn btn-default btn-xs">
+            <img class="img-responsive" src="view/img/work.png" alt="Chania" width="460" height="345">
+          </button>
+          <div class="space"></div>
+          <div class="space"></div>
+          <div class="space"></div> 
+            <button class="btn btn-default btn-xs">
+            <img class="img-responsive" src="view/img/reload.png" alt="Chania" width="460" height="345">
+          </button>
+          <div class="space"></div>
+          <div class="space"></div> 
+        </div>
+        <!-- end ".variables" -->
+
+      </div>
+         <!-- end ".bodySD" -->
+
+    </div>
+    <!-- end ".container-fluid" -->
+
+
+
+
+    <div id="popupCharge" class="popup">
+        <form id="myFormObj" >
+           <td>
+            <label for="x">x: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="x" value="0" size="3" id="px">
+            <label for="m">m,  </label> 
+           </td>
+           <td>
+            <label for="y">y: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="y" value="0" size="3" id="py">
+            <label for="m">m,  </label> 
+           </td>
+           <td>
+            <label for="z">z: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="z" value="0" size="3" id="pz">
+            <label for="m">m</label> 
+           </td> <br>
+           <td>
+           <td>
+            <label for="carga">Carga: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="carga" value="10" size="4" id="carga">
+           </td> 
+            <td>
+            <label for="c">x10&#8315;&#8310; C </label>    
+           </td><br>
+           <td>
+            <input type="button" onclick="_setup('popupCharge');" value="Confirma">
+            <input type="button" onclick="_close('popupCharge');" value="Cancela">
+           </td>
+        </form>
+    </div>
+	<!-- end div popup prove charge -->
+
+    <div id="popupDot" class="popup">
+        <form id="myFormObj" >
+           <td>
+            <label for="x">x: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="x" value="0" size="3" id="pxd">
+            <label for="m">m,  </label> 
+           </td>
+           <td>
+            <label for="y">y: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="y" value="0" size="3" id="pyd">
+            <label for="m">m,  </label> 
+           </td>
+           <td>
+            <label for="z">z: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="z" value="0" size="3" id="pzd">
+            <label for="m">m</label> 
+           </td> <br>
+           <td>
+           <td>
+            <label for="carga">Carga: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="carga" value="10" size="4" id="cargad">
+           </td> 
+            <td>
+            <label for="c">x10&#8315;&#8310; C </label>    
+           </td><br>
+           <td>
+            <input type="button" onclick="_setup('popupDot');" value="Confirma">
+            <input type="button" onclick="_close('popupDot');" value="Cancela">
+           </td>
+        </form>
+    </div>
+	<!-- end div popup dot -->
+
+
+    <div id="popupRing" class="popup">
+        <form id="myFormObj" >
+           <td>
+            <label for="raio">raio: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="x" value="4" size="3" id="raior">
+            <label for="m">m</label> 
+           </td> <br>
+           <td>
+            <label for="x">x: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="x" value="0" size="3" id="pxr">
+            <label for="m">m,  </label> 
+           </td>
+           <td>
+            <label for="y">y: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="y" value="0" size="3" id="pyr">
+            <label for="m">m,  </label> 
+           </td>
+           <td>
+            <label for="z">z: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="z" value="0" size="3" id="pzr">
+            <label for="m">m</label> 
+           </td> <br>
+           <td>
+           <td>
+            <label for="carga">Carga: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="carga" value="10" size="4" id="cargar">
+           </td> 
+            <td>
+            <label for="c">x10&#8315;&#8310; C </label>    
+           </td><br>
+           <td>
+            <input type="button" onclick="_setup('popupRing');" value="Confirma">
+            <input type="button" onclick="_close('popupRing');" value="Cancela">
+           </td>
+        </form>
+    </div>
+	<!-- end div popup ring -->
+
+
+    <div id="popupLine" class="popup">
+        <form id="myFormObj" >
+           <td>
+            <label for="comprimento">comprimento: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="x" value="4" size="3" id="lengthl">
+            <label for="m">m</label> 
+           </td> <br>
+           <td>
+            <label for="x">x: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="x" value="0" size="3" id="pxl">
+            <label for="m">m,  </label> 
+           </td>
+           <td>
+            <label for="y">y: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="y" value="0" size="3" id="pyl">
+            <label for="m">m,  </label> 
+           </td>
+           <td>
+            <label for="z">z: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="z" value="0" size="3" id="pzl">
+            <label for="m">m</label> 
+           </td> <br>
+           <td>
+           <td>
+            <label for="carga">Carga: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="carga" value="10" size="4" id="cargal">
+           </td> 
+            <td>
+            <label for="c">x10&#8315;&#8310; C </label>    
+           </td><br>
+           <td>
+            <input type="button" onclick="_setup('popupLine');" value="Confirma">
+            <input type="button" onclick="_close('popupLine');" value="Cancela">
+           </td>
+        </form>
+    </div>
+	<!-- end div popup line -->
+
+
+    <div id="popupDisc" class="popup">
+        <form id="myFormObj" >
+           <td>
+            <label for="raio">raio: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="x" value="4" size="3" id="raiodi">
+            <label for="m">m</label> 
+           </td> <br>
+           <td>
+            <label for="x">x: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="x" value="0" size="3" id="pxdi">
+            <label for="m">m,  </label> 
+           </td>
+           <td>
+            <label for="y">y: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="y" value="0" size="3" id="pydi">
+            <label for="m">m,  </label> 
+           </td>
+           <td>
+            <label for="z">z: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="z" value="0" size="3" id="pzdi">
+            <label for="m">m</label> 
+           </td> <br>
+           <td>
+           <td>
+            <label for="carga">Carga: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="carga" value="10" size="4" id="cargadi">
+           </td> 
+            <td>
+            <label for="c">x10&#8315;&#8310; C </label>    
+           </td><br>
+           <td>
+            <input type="button" onclick="_setup('popupDisc');" value="Confirma">
+            <input type="button" onclick="_close('popupDisc');" value="Cancela">
+           </td>
+        </form>
+    </div>
+	<!-- end div popup disc -->
+
+    <div id="popupCena" class="popupCena">
+        <form id="myFormObj" >
+           <td>
+            <label for="Propriedades">Propriedades: </label>    
+           </td> <br>
+           <td>
+            <label for="x">x: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="x" size="3" id="ptx">
+            <label for="m">m,  </label> 
+           </td>
+           <td>
+            <label for="y">y: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="y" size="3" id="pty">
+            <label for="m">m,  </label> 
+           </td>
+           <td>
+            <label for="z">z: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="z" size="3" id="ptz">
+            <label for="m">m</label> 
+           </td> <br>
+           <td>
+           <td>
+            <label for="carga">Carga: </label>    
+           </td>
+           <td align="left">
+            <input type="text" name="carga" size="4" id="cargaCena">
+           </td> 
+           <td>
+            <label for="c">x10&#8315;&#8310; C </label>    
+           </td> <br>
+           <td>
+            <input type="button" onclick="change()" value="Confirma">
+            <input type="button" onclick="remove()" value="Excluir">
+           </td>
+        </form>
+    </div>
+
+    <div id="comboBox" class="comboBox">
+        <form id="myFormObj" >
+        <td>
+            <label for="Ponto Inicial">PontoInicial: </label>    
+        </td>
+        <select id="cboPincial" style="width: 50px;">
+        </select> <br>
+        <td>
+            <label for="Ponto Final">PontoFinal: </label>    
+        </td>
+        <select id="cboPfinal" style="width: 50px;">
+        </select> <br> <br>
+           <td>
+            <input type="button" onclick="calculaTrabalhoBotao()" value="Calcular">
+            <input type="button" onclick="_fecharPop()" value="Cancelar">
+           </td>
+        </form>
+    </div>
+
+    <div id="popupConfiguration" class="popupConfiguration">
+        <form id="myFormObj" >
+		  <label class="mr-sm-2" for="inlineFormCustomSelect">Idioma</label>
+		  <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="inlineFormCustomSelect">
+		    <option selected>Portugues</option>
+		    <!-- <option value="1">Ingles</option> -->
+		  </select> <br>
+		  <label class="form-check-label ">
+		    <input type="checkbox" checked="checked" class="form-check-input" id="labelsSelected" value="true">
+		    Exibir labels nos pontos
+		  </label> <br> <br>
+		  <label class="form-check-label ">
+		    <input type="checkbox" class="form-check-input" id="xOyPlaneSelected" value="true">
+		    Exibir plano xOy <br>
+        <input type="checkbox" class="form-check-input" id="yOzPlaneSelected" value="true">
+        Exibir plano yOz <br>
+        <input type="checkbox" class="form-check-input" id="xOzPlaneSelected" value="true">
+        Exibir plano xOz <br>
+		  </label> <br> <br>
+      <label class="form-check-label ">
+          <input type="checkbox" checked="checked" class="form-check-input" id="axesSelected" value="true">
+          Exibir eixos
+       </label> <br>
+		  <label class="mr-sm-2" for="inlineFormCustomSelect">Precisão exibida de </label>
+		  <select class="custom-select mb-2 mr-sm-2 mb-sm-0" id="precisionSelected">
+		    <option value="1">1</option>
+		    <option value="2" selected>2</option>
+   		    <option value="3">3</option>
+		    <option value="4">4</option>
+   		    <option value="5">5</option>
+		  </select> 
+		  <label class="mr-sm-2" for="inlineFormCustomSelect"> casas decimais </label> <br> <br>
+           <td>
+            <input type="button" onclick="_save_new_configuration()" value="Salvar">
+            <input type="button" onclick="_close_set_configuration()" value="Cancelar">
+           </td>
+        </form>
+    </div>
+
+    <div id="popupHelp" class="popupHelp">
+        <form id="myFormObj" >
+		  <h1>Keyboard Inputs</h1>
+		  <p>To indicate input that is typically entered via the keyboard, use the kbd element:</p>
+		  <p>Use <kbd>ctrl + p</kbd> to open the Print dialog box.</p> <br> <br>
+            <input type="button" onclick="_close_help()" value="OK">
+        </form>
+    </div>
+
+
+    <div id="divTrans" class="divTrans"> lohmann </div>
+    <div id="info" class="info">  </div>
+
+    <script type="text/javascript" src="view/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="view/libs/bootstrap.min.js"></script>
+    <script type="text/javascript" src="view/libs/three.js"></script>
+    <script type="text/javascript" src="view/libs/Projector.js"></script>
+    <!-- end import libraries -->
+
+
+    <script type="text/javascript" src="view/js/resize.js"></script>
+    <script type="text/javascript" src="view/js/Tela.js"></script>
+    <script type="text/javascript" src="view/js/Cena3D.js"></script>
+    <script type="text/javascript" src="view/js/Objetos.js"></script>
+    <script type="text/javascript" src="view/js/ObjectsBar.js"></script>
+    <script type="text/javascript" src="view/js/texto.js"></script>
+    <script type="text/javascript" src="view/js/defines.js"></script>
+    <script type="text/javascript" src="view/js/controls/OrbitControls.js"></script>
+    <!-- end import view components -->
+
+<!--     <script type="text/javascript" src="view/fonts/helvetiker_regular.typeface.js"></script>
+    <script type="text/javascript" src="view/fonts/helvetiker_bold.typeface.js"></script>
+    <script type="text/javascript" src="view/fonts/bitstream_vera_sans_mono_roman.typeface.js"></script> -->
+
+    <!-- <script type="text/javascript" src="js/model/X.js"></script>     -->
+    <!-- end import model components -->
+
+    <script type="text/javascript" src="controller/main.js"></script>
+    <script type="text/javascript" src="controller/controller.js"></script>
+    <script type="text/javascript" src="model/fisica.js"></script>
+    <!-- end import controller components -->
+
+  </body>
+  <!-- end ".body" -->
+</html>
+<!-- end page -->

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Phimulator</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <style>
+    body {
+        padding-top: 70px;
+        /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+    }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Home</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">Sobre o Projeto</a>
+                    </li>
+                    <li>
+                        <a href="#">Simuladores</a>
+                    </li>
+                    <li>
+                        <a href="#">Contribuidores</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h1>SDCampE: Simulador de Campo Elétrico</h1>
+                <p>&nbsp;</p>
+ <h3 style="text-align: justify;">&nbsp;O software <em>Simulador de Campo El&eacute;trico</em> &eacute; uma ferramenta que permite dentre outras funcionalidades, realizar o c&aacute;lculo do campo el&eacute;trico, E, da for&ccedil;a el&eacute;trica, F, do trabalho realizado por uma part&iacute;cula carregada, W, e do potencial el&eacute;trico, V, em qualquer ponto do espa&ccedil;o tridimensional considerando uma distribui&ccedil;&atilde;o de cargas el&eacute;tricas uniforme em objetos de simetria simples. Este software foi resultado de um trabalho de conclus&atilde;o de curso de Bacharelado em Ci&ecirc;ncia da Computa&ccedil;&atilde;o Universidade Tecnol&oacute;gica Federal do Paran&aacute; campus de Campus Mour&atilde;o (UTFPR &ndash; CM) do estudante Douglas Lohmann, orientado pelos professores Dr. Cesar Vanderlei Deimling (Orientador) e Me. Lucio Valentin (Co-Orientador), defendido no ano de 2016, dispon&iacute;vel em: <a href="https://github.com/Phimulator/SDCampE">https://github.com/Phimulator/SDCampE</a>.</h3>
+<h3 style="text-align: justify;">De uma maneira simples, a determina&ccedil;&atilde;o de qualquer uma das grandezas f&iacute;sicas citadas acima se inicia montando a distribui&ccedil;&atilde;o de cargas el&eacute;tricas, ou seja, clicando em qualquer um dos objetos (carga pontual, anel, disco ou linha) o usu&aacute;rio pode escolher os valores de carga el&eacute;trica e as devidas posi&ccedil;&otilde;es no espa&ccedil;o, conforme mostrado na Figura 1. Os objetos podem ser arrastados e seus valores editados por meio do uso do mouse.</h3>
+<p><img style="display: block; margin-left: auto; margin-right: auto;" src="img/01.png" alt="Figura 1: Inser&ccedil;&atilde;o de um anel na origem do sistema com raio de 4 metros e carga de 10x10-6 C." /></p>
+<h3 style="text-align: justify;" align="justify">Tendo conclu&iacute;do a distribui&ccedil;&atilde;o de cargas, o pr&oacute;ximo passo &eacute; determinar o local do espa&ccedil;o onde o campo el&eacute;trico, a for&ccedil;a ou o Potencial ser&atilde;o determinados, ou seja, o ponto P mostrado na Figura 2. Para isso &eacute; necess&aacute;rio inserir a fun&ccedil;&atilde;o ponto, localizada na parte superior esquerda, que necessitar&aacute; de uma coordenada e um valor de carga para ser inserida. A carga ser&aacute; apenas necess&aacute;ria para realizar o c&aacute;lculo da for&ccedil;a F e do trabalho W. No caso do trabalho, ser&aacute; necess&aacute;rio inserir dois pontos, o ponto inicial P<sub>i</sub> e o ponto final P<sub>f</sub> que ser&atilde;o definidos por meio de uma caixa de di&aacute;logo que se abrir&aacute; quando acionada a fun&ccedil;&atilde;o W na aba direita.</h3>
+<p align="justify"><img style="display: block; margin-left: auto; margin-right: auto;" src="img/02.png" alt="Figura 2: Inser&ccedil;&atilde;o do ponto P de carga q0 = 10x10-6 C, nas coordenadas P = (4;5;6)m que permitir&aacute; a obten&ccedil;&atilde;o do campo el&eacute;trico E, for&ccedil;a F, ou potencial V." /></p>
+<h3 style="text-align: justify;" align="justify">Uma vis&atilde;o diferenciada, modificando o &acirc;ngulo e a resolu&ccedil;&atilde;o pode ser obtida utilizando as setas do teclado. Os valores de campo el&eacute;trico E e de for&ccedil;a F (eq. 2) s&atilde;o obtidos por meio da lei de Coulomb, ou seja, Cada objeto carregado que comp&otilde;e a distribui&ccedil;&atilde;o de cargas, &eacute; dividido em pequenas partes de cargas, dq, (No caso do anel e da linha s&atilde;o 1000 partes e no caso do disco s&atilde;o 500000 partes) e para cada uma dessas partes &eacute; realizado o c&aacute;lculo do campo el&eacute;trico, dE, pela lei de Coulomb, descrita na equa&ccedil;&atilde;o 1:</h3>
+<p align="justify">&nbsp;</p>
+<p style="text-align: right;" align="justify"><img style="display: block; margin-left: auto; margin-right: auto;" src="data:image/png;base64,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" alt="" width="103" height="42" data-cke-saved-src="data:image/png;base64,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" />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;(1)</p>
+<p style="text-align: left;" align="justify">&nbsp;</p>
+<p style="text-align: right;"><img style="display: block; margin-left: auto; margin-right: auto;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADsAAAAUCAIAAAC8vdIHAAADWElEQVR4nL1W3SuzYRh/2NAc+NwSKSscYDhaiyT5CsmB0iKRJKQorXFAbdHb8lXOFnKk9gfMRyvtaHIoMiHl40BJhC3f8f567t77vd/nffZsj7b9DtZ1Xc/9XNdv1319PMrv72/uD25vb/V6PccAlufn54KCgq2trZycHC4ykBVXySoajebi4oK1tLe3Nzc3G41GpfKfk+GFrLhBeDgcjvCSCxEScUUYHxwczM7Orq2tabXa9PR0Yvz8/Pz6+sKjSHEMEPf6+npsbGxkZESKcUlJSW9vL95cWVmpqakhxo+Pj+7u7sjRZeMuLS3V1dURo91uz83NZY+JV4XX6yUuWGNnZ2dkqArj6nQ6akHblZaWsmcCMs7MzERDEPXx8TE5ObmpqUkug729vbm5OZVK9fDwcHZ2Njg42N/fL804NTUVoTm+Du/v7xsbGwVnAjJmE2wymZaXl6m6vb1Nb00AhUKBSET2eDwdHR1utzsvL4/js/X6+ir9DxG3qKiIyC6XCwOura0tVMaJiYlVVVWQMbDBg31aW1vLTnFRoE1RlKOjo4Suz+e7uroqLCwMyhgX0tDQAPn4+Hhzc/P/MyKMb25u7u7u0LY9PT1Q39/f2VYNEbu7u6enpxioRD06OsIvzZ8oSNzFxcXh4WGoAwMD+fn5ITEm5Y99Q9S4uLjx8XG5jDGqkC1SkcDh4WFKSkpWVpbEK4K2m56eRmgZjOkNxsTECPYkSrO+vl40KlYUKVbcDLuu4JOmAIU+MTEB9peXlzMzM7TkSNzi4mKiqtVq/E5OTk5NTQVnDHdJSUminIDq6mraXoGAVKF2MU1bW1v39/c3NjYqKyvJI6fTiQWBq7darbC3tLTQuBkZGXRAcXzvxsbGCpPCKkiMxWJZX19/eXkZGhrq6uoyGAzSzAIBqweDzGw2z8/Pgxwc0ktDiZeVlXF8We/s7IAxZp/NZkNcv99fUVFBjqG5z8/PV1dXpRjHx8f/4vEzlgLYeUB4enoCadp24JeQkACBzGkIKHEbj1DcRvCLjAJDg2MaAzvi7e0NAsZtWlqaXG/RYHxycoKuyM7OJipKgvwHDJDy8nK53qKXY2zNvr4+CPjwxbhcWFhA1f5g80eDsZXH35BKJT42fuwtGozDi99Pm44xqnzhCwAAAABJRU5ErkJggg==" alt="" name="Objeto2" align="absmiddle" hspace="8" />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (2)</p>
+<p style="text-align: justify;">&nbsp;</p>
+<h3 style="text-align: justify;" align="justify">Concomitantemente aos c&aacute;lculos de campo &eacute; realizado a soma vetorial dos mesmos obtendo ao final o valor do campo el&eacute;trico total ou da for&ccedil;a el&eacute;trica total, correspondente &agrave; distribui&ccedil;&atilde;o de cargas existentes na tela. Quando clicamos no &iacute;cone E ou F da aba direita, o valor dos vetores campo el&eacute;trico ou for&ccedil;a s&atilde;o representados em escala, assim como em coordenadas, que podem ser acessadas clicando no &iacute;cone que surge na tela logo abaixo do ponto P conforme mostra a Figura 3.</h3>
+<p style="text-align: justify;" align="justify">&nbsp;</p>
+<p align="justify"><img style="display: block; margin-left: auto; margin-right: auto;" src="img/03.png" alt="Figura 3: Representa&ccedil;&atilde;o do Campo el&eacute;trico E, obtido no ponto P. Detalhe para a tela indicativa do valor num&eacute;rico das componentes do campo E." /></p>
+<h3 style="text-align: justify;" align="justify">Para a determina&ccedil;&atilde;o do trabalho e do potencial el&eacute;trico um procedimento parecido ao do c&aacute;lculo do campo el&eacute;trico foi adotado, considerando V = 0 no infinito. Nesse procedimento, o potencial foi obtido utilizando a equa&ccedil;&atilde;o 3. Conhecendo a diferen&ccedil;a de potencial el&eacute;trico em dois pontos do espa&ccedil;o, o inicial e o final, por meio da equa&ccedil;&atilde;o 4 &eacute; obtido o trabalho de uma carga q<sub>0</sub> que evolui em qualquer trajet&oacute;ria do ponto inicial ao ponto final na presen&ccedil;a de um campo E que varia no espa&ccedil;o.</h3>
+<p style="text-align: right;" align="justify"><img style="display: block; margin-left: auto; margin-right: auto;" src="data:image/png;base64,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" alt="" name="Objeto3" align="absmiddle" hspace="8" />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;(4)</p>
+<p style="text-align: right;" align="justify"><img style="display: block; margin-left: auto; margin-right: auto;" src="data:image/png;base64,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" alt="" name="Objeto4" align="absmiddle" hspace="8" />&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; (5)</p>
+<p style="text-align: right;" align="justify">&nbsp;</p>
+<h3 style="text-align: justify;" align="justify">Vale apena lembrar que as cargas el&eacute;tricas q<sub>0</sub>, atribu&iacute;das ao ponto P, n&atilde;o s&atilde;o utilizadas no c&aacute;lculo do campo el&eacute;trico e do potencial el&eacute;trico. Outro ponto a ser destacado decorre da intera&ccedil;&atilde;o entre os pontos P. Em nenhuma situa&ccedil;&atilde;o que possa ser abordada por esse software &eacute; levada em considera&ccedil;&atilde;o a intera&ccedil;&atilde;o entre as cargas atribu&iacute;das em cada um dos pontos P (quando mais de um ponto P &eacute; inserido na tela).</h3>
+<h3 style="text-align: justify;" align="justify">Finalizando, podemos fazer uma considera&ccedil;&atilde;o acerca da confiabilidade do software desenvolvido. Nos testes realizados pela equipe desenvolvedora, a precis&atilde;o do c&aacute;lculo de qualquer uma das grandezas f&iacute;sicas sempre se mostrou superior a 4 (quatro) algarismos significativos, podendo chegar a precis&atilde;o superior a 7 algarismos dependendo do caso.</h3>
+<p style="text-align: justify;" align="justify">&nbsp;</p>
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
+
+    <script type="text/javascript" src="../view/libs/jquery.min.js"></script>
+    <script type="text/javascript" src="../view/libs/bootstrap.min.js"></script>
+
+</body>
+
+</html>

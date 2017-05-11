@@ -1,0 +1,232 @@
+.body{
+	min-width:250px;
+	width: auto !important;
+/*	min-height:300px;
+	height: auto !important;*/
+/*    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden; */
+}
+
+/*#bodySD{
+	height: 90%;
+}*/
+
+
+.container-fluid{
+	min-height:100%;
+	height:100%;
+}
+
+#headerPage{
+	background-color: #1a1a1a;
+	height: 30px;
+}
+
+.glyphiColor{
+	color: #E6E6FA;
+	top: 4px;
+	font-size:1.5em;
+}
+
+.glyphiReflesh{
+	color: red;
+	top: 4px;
+	font-size:3.0em;
+}
+
+#webGl{
+   background-color:#80ccff;
+   padding: 0 !important;
+   margin: 0 !important;
+   /*overflow:auto;*/
+}
+
+#textSD{
+	color:#E6E6FA;
+	font-size:1.0em;
+}
+
+.space{
+	height: 10px;
+}
+
+.img-responsive {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: auto;
+}
+
+#objects{
+    background-color:#66c2ff;
+    min-height: 150px;
+    overflow-y:auto;
+    direction: rtl;
+    float: center;
+    
+}
+
+#variables{
+    background-color:#66c2ff;
+    overflow-y:auto;
+    min-height: 150px;
+}
+
+.popup{
+    margin: auto;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    border: solid 1px #331;
+    background: #00FF66;
+    /*opacity:0.9;*/
+    position: absolute;
+    z-index: 4;
+    display: none;
+    vertical-align: top; 
+}
+
+.divTrans{
+ top: 0px;
+ width:100%; height:auto; min-height:100%; /* aqui é onde acontece a mágica, a propriedade height:auto e min-height: 100% fará com que esta div ocupe sempre a altura total do navegador, mesmo quando redimensionado */
+ background:black;
+ position: absolute;
+ display: none;
+ z-index: 3;
+ opacity:0.5;
+}
+
+.info{
+    margin: auto;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    border: solid 1px #331;
+    background: #66CDAA;
+    /*opacity:0.8;*/
+    position: absolute;
+    z-index: 4;
+    display: none;
+    vertical-align: top;   
+}
+
+
+.comboBox{
+    margin: auto;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    border: solid 1px #331;
+    background: #00FF00;
+    /*opacity:0.8;*/
+    position: absolute;
+    z-index: 4;
+    display: none;
+    vertical-align: top;   
+}
+
+.popupConfiguration{
+    margin: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%
+    width: auto;
+    height: auto;
+    padding: 20px;
+    border: solid 1px #331;
+    background: #e6ffff;
+    /*opacity:0.9;*/
+    z-index: 4;
+    display: none;
+    transform: translate(-50%, 0);
+    /*vertical-align: top;  */
+}
+
+.popupHelp{
+    margin: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%
+    width: auto;
+    height: auto;
+    padding: 20px;
+    border: solid 1px #331;
+    background: #e6ffff;
+    /*opacity:0.9;*/
+    z-index: 4;
+    display: none;
+    transform: translate(-50%, 0);
+    /*vertical-align: top;  */
+}
+
+.popupCena{
+    margin: auto;
+    width: auto;
+    height: auto;
+    padding: 20px;
+    border: solid 1px #331;
+    background: #1E90FF;
+    /*opacity:0.9;*/
+    position: absolute;
+    z-index: 4;
+    display: none;
+    vertical-align: top;
+    id: 0;
+}
+
+h1 {
+    font-size: 20px;
+    align:center;
+}
+
+@media all and (max-device-width: 1220px){
+    h1 {
+        font-size: 14px;
+    }
+}
+
+@media all and (max-device-width: 1000px){
+    h1 {
+        font-size: 18px;
+    }
+}
+
+@media all and (max-device-width: 720px){
+    h1 {
+        font-size: 16px;
+    }
+}
+
+@media all and (max-device-width: 640px){
+    h1 {
+        font-size: 12px;
+    }
+}
+
+@media all and (max-device-width: 500px){
+    h1 {
+        font-size: 10px;
+    }
+}
+
+@media all and (max-device-width: 400px){
+    h1 {
+        font-size: 8px;
+    }
+}
+
+@media all and (max-device-width: 340px){
+    h1 {
+        font-size: 6px;
+    }
+}
+
+@media all and (max-device-width: 250px){
+    h1 {
+        font-size: 0px;
+    }
+}
+
