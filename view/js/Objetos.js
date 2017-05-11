@@ -1,14 +1,15 @@
 // define a classe Anel
 var RingView = function(raio,carga,px,py,pz) { 
     var torusGeometry = new THREE.TorusGeometry(raio, 0.4, 20, 60, Math.PI*5 ); 
-    var torusMaterial = new THREE.MeshLambertMaterial({color: 0xff0000});
+    var torusMaterial = new THREE.MeshLambertMaterial({color: 0xff0000,wireframe: true});
     var torus = new THREE.Mesh(torusGeometry, torusMaterial);
     torus.position.x = px;
     torus.position.y = py;
     torus.position.z = pz;
     torus.raio = raio;
     torus.carga = carga;
-    torus.rotation.y = Math.PI / 2;
+    torus.name = "ring";
+    // torus.rotation.y = Math.PI / 2;
     return torus;
 }
 
@@ -23,6 +24,7 @@ var DotView = function(raio,carga,px,py,pz) {
     sphere.position.y = py;
     sphere.position.z = pz;
     sphere.carga = carga;
+    sphere.name = "dot";
     return sphere;
 }
 
@@ -40,7 +42,7 @@ var ChargeView = function(raio,carga,px,py,pz) {
 
 var DiscView = function(raio,carga,px,py,pz){
     
-    var geometry = new THREE.CircleGeometry(raio, 32);
+    var geometry = new THREE.CircleGeometry(raio, 100);
     var material = new THREE.MeshBasicMaterial( { color: 0x00FFFF} );
     material.side = THREE.DoubleSide;
     var circle = new THREE.Mesh( geometry, material );
@@ -49,7 +51,12 @@ var DiscView = function(raio,carga,px,py,pz){
     circle.position.z = pz;
     circle.raio = raio;
     circle.carga = carga;
-    circle.rotation.y = Math.PI / 2;
+    // circle.rotation.y = Math.PI / 2;
+    circle.name = "disc";
+    // var geo = new THREE.WireframeGeometry( circle.geometry ); // or WireframeGeometry
+    // var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
+    // var wireframe = new THREE.LineSegments( geo, mat );
+    // circle.add( wireframe );
     return circle;
 }
 
@@ -63,7 +70,8 @@ var LineView = function(raio,carga,px,py,pz){
     disco.position.z = pz;
     disco.raio = raio;
     disco.carga = carga;
-    disco.rotation.z = Math.PI / 2;
+    disco.name = "line";
+    // disco.rotation.z = Math.PI / 2;
     return disco;
 }
 
@@ -215,3 +223,15 @@ var create_helper_xOz = function(){
     helper_xOz.name = "plane_xOz"
     return helper_xOz;
 }
+
+
+// Vector3
+// .distanceTo ( v )
+// Computes the distance from this vector to v.
+// .distanceToManhattan ( v )
+// Computes the Manhattan distance from this vector to v.
+// .distanceToSquared ( v )
+// Computes the squared distance from this 
+// vector to v. If you are just comparing the distance with 
+// another distance, you should compare the distance squared instead
+ // as it is slightly more efficient to calculate.

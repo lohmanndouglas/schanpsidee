@@ -95,8 +95,18 @@ var Cena3D = function(div) {
     //     scene.add(obj);
     // }
 
+
+    // var vector = new THREE.Vector3(4,0,0);
+    // a = tela.cena3D.listObjView();
+    // vector = a[0].geometry.vertices[0];
+    // var vectorT = new THREE.Vector3();
+
+
+
+
     this.addObject = function(obj){
         scene.add(obj);
+        //renderScene();
         objetos.push(obj);
     }
 
@@ -195,7 +205,6 @@ var Cena3D = function(div) {
         }    
     }
 
-
     //* This function show/remove the plane xOy */
     this.drawPlanes_xOy = function(){
         if(HELP_PLANE_xOy==true && scene.getObjectByName('plane_xOy') == null ){
@@ -230,13 +239,12 @@ var Cena3D = function(div) {
             scene.remove(scene.getObjectByName('axes_help'));
         }
     }
-
-
+    //* This function add text obj at scene and list*/
     this.addTexto = function(obj){
-    	console.log("addTexto");
         scene.add(obj);
         textos.push(obj);
     }
+
 
     function onDocumentMouseMove( event ) {
         event.preventDefault();
