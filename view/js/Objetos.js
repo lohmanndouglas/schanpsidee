@@ -9,7 +9,7 @@ var RingView = function(raio,carga,px,py,pz) {
     torus.raio = raio;
     torus.carga = carga;
     torus.name = "ring";
-    // torus.rotation.y = Math.PI / 2;
+    torus.rotation.y = Math.PI / 2;
     return torus;
 }
 
@@ -51,7 +51,7 @@ var DiscView = function(raio,carga,px,py,pz){
     circle.position.z = pz;
     circle.raio = raio;
     circle.carga = carga;
-    // circle.rotation.y = Math.PI / 2;
+    circle.rotation.y = Math.PI / 2;
     circle.name = "disc";
     // var geo = new THREE.WireframeGeometry( circle.geometry ); // or WireframeGeometry
     // var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
@@ -71,7 +71,7 @@ var LineView = function(raio,carga,px,py,pz){
     disco.raio = raio;
     disco.carga = carga;
     disco.name = "line";
-    // disco.rotation.z = Math.PI / 2;
+    disco.rotation.z = Math.PI / 2;
     return disco;
 }
 
