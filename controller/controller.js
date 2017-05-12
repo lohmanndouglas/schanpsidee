@@ -410,7 +410,7 @@ function calcJob(i_initial, i_final){
                 // for(k = 0; k < n_iterations ; k++){
                 //     new_vertices[k]=vertices[k].applyProjection(matriz_t);
                 // }
-                total[i] = calc_potential(new_vertices, Dot_POSITION, charge);   
+                total[i] = total[i] + calc_potential(new_vertices, Dot_POSITION, charge);   
             } // end of for
         }
         /* TODO: change addVector and addVectorInfo to acept vector3.
