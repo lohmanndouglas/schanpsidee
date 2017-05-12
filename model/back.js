@@ -152,6 +152,12 @@ function calcCampoLinha(p_click, p_obj, comprimento, carga){
 };
 
 
+
+
+
+
+
+
 // calcTrabalho(p_inicial, p_final, o[j], oModel[j]);
 function calcTrabalho(p_inicial, p_final, objetosView, objetosModel, carga){
 	this.pontoInical = p_inicial;
@@ -169,7 +175,6 @@ function calcPotecialPonto(ponto, listaObjView, listaObjModel){
         // percorer o vetor de objetos
         for(this.j = 0; this.j < this.o.length; this.j++){
             this.p_obj = [this.o[this.j].position.x, this.o[this.j].position.y, this.o[this.j].position.z];
-            // verificar se objeto tem mudar 
             this.raio = this.o[this.j].raio;
             this.carga = this.oModel[this.j].carga;
             if(this.o[this.j].geometry.type == "TorusGeometry"){
@@ -309,79 +314,4 @@ function calcPotencialLinha(p_click, p_obj, comprimento, carga){
 
 	V = V.toFixed(10);
    	return V;	
-};
-
-
-function calc_eletric_fild(vert, dot){
-
-	alert(vert[0].x);
-	alert(dot.x);
- 
-    // pegar carga
-    var carga = 10;
-    var Q = carga * Math.pow(10,-6);
-    
- //    // console.log(Q.toExponential(4));
-    var dQ = Q/vert.length;
-
-	// var teta = 0;
-	// var dTeta = 2*Math.PI/nIteracoes;
-	var E = [0, 0, 0];       
-	var dE = [0, 0, 0]; 
-	var epsilon = 8.854 * Math.pow(10,-12); // constante de permissividade C^2/N*m^2
-	var k = 1 / (4*Math.PI*epsilon);
-	// // p is a vector of point of dQ
-    var p = [0, 0, 0]; 
-	// // r is vector from ring dq to click point
-	// var r = [0, 0, 0]; 
-	// var rUnitario = [0, 0, 0]; 
-	// var rModulo = [0, 0, 0]; 
-    var i = 0;
-	// for (i = 0; i < vert.length; i++){
-	var d = new THREE.Vector3();
-	for (i = 0; i < 1; i++){
-		// var d = vert[i].distanceTo(dot);
-		d = dot.sub(vert[i])
-		alert(d);
-		
-  		dE[0] = k*(dQ/Math.pow(rModulo,2))*rUnitario[0];
-	    dE[1] = k*(dQ/Math.pow(rModulo,2))*rUnitario[1];
-	    dE[2] = k*(dQ/Math.pow(rModulo,2))*rUnitario[2];
-	 	
-	  	// E[0] = E[0] + dE[0];
-	  	// E[1] = E[1] + dE[1];
-	  	// E[2] = E[2] + dE[2];
-	}
-
-
-
-	// for (var i = 0; i < nIteracoes; i++) {
-
-	// 	p[0] = 0 + p_obj[0];
-	//  	p[1] = raio*Math.cos(teta) + p_obj[1];
-	//  	p[2] = raio*Math.sin(teta) + p_obj[2];
-
-	//  	r[0] = p_click[0] - p[0];
-	//  	r[1] = p_click[1] - p[1];
-	//  	r[2] = p_click[2] - p[2];
-
-	//  	rModulo = calcMod(r); // função sqrsp
-	//  	rUnitario[0] = r[0]/rModulo;
-	//  	rUnitario[1] = r[1]/rModulo;
-	//  	rUnitario[2] = r[2]/rModulo;
-	 	
-	//  	dE[0] = k*(dQ/Math.pow(rModulo,2))*rUnitario[0];
-	//  	dE[1] = k*(dQ/Math.pow(rModulo,2))*rUnitario[1];
-	//  	dE[2] = k*(dQ/Math.pow(rModulo,2))*rUnitario[2];
-	 	
-	//  	E[0] = E[0] + dE[0];
-	//  	E[1] = E[1] + dE[1];
-	//  	E[2] = E[2] + dE[2];
-	//  	teta = teta + dTeta;
- //   	};
-	// // console.log("Modulo E: ", calcMod(E)); 
-	// E[0] = E[0].toFixed(10);
-	// E[1] = E[1].toFixed(10);
-	// E[2] = E[2].toFixed(10);
- //   	return E;
 };

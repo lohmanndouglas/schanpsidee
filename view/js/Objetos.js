@@ -16,7 +16,6 @@ var RingView = function(raio,carga,px,py,pz) {
 
 // define a classe Ponto
 var DotView = function(raio,carga,px,py,pz) { 
-
     var sphereGeometry = new THREE.SphereGeometry( 0.25, 8, 8 );
     var sphereMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00} );
     var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
@@ -29,7 +28,6 @@ var DotView = function(raio,carga,px,py,pz) {
 }
 
 var ChargeView = function(raio,carga,px,py,pz) { 
-
     var sphereGeometry = new THREE.SphereGeometry( 0.25, 8, 8 );
     var sphereMaterial = new THREE.MeshBasicMaterial( {color: 0x000000} );
     var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
