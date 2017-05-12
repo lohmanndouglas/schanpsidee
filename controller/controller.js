@@ -75,14 +75,21 @@ function calcField() {
                     break;
                     case "disc":
                         var radius = objects[j].raio;
-                        alert("ERRO: disc");
                         var n_iterations = 1000;
-                        var teta = 0;
-                        var dTeta = 2*Math.PI/n_iterations; 
-                        for(var k = 0; k < n_iterations ; k++){
-                            vertices[k] = new THREE.Vector3(radius*Math.cos(teta), radius*Math.sin(teta),0);
-                            new_vertices[k]=vertices[k].applyProjection(matriz_t);
-                            teta = teta + dTeta;
+                        var n_iradius = 900;
+                        var dR = radius/n_iradius;
+                        var R = dR/2;
+                        var inte = 0;
+                        for(var l = 0; l < n_iradius ; l++){
+                            var teta = 0;
+                            var dTeta = 2*Math.PI/n_iterations;
+                            for(var k = 0; k < n_iterations ; k++){
+                                vertices[inte] = new THREE.Vector3(R*Math.cos(teta), R*Math.sin(teta),0);
+                                new_vertices[inte]=vertices[inte].applyProjection(matriz_t);
+                                teta = teta + dTeta;
+                                inte++;
+                            }
+                            R = R + dR;
                         }  
                     break;
                 }
@@ -182,14 +189,21 @@ function calcForce(){
                     break;
                     case "disc":
                         var radius = objects[j].raio;
-                        alert("ERRO: disc");
                         var n_iterations = 1000;
-                        var teta = 0;
-                        var dTeta = 2*Math.PI/n_iterations; 
-                        for(var k = 0; k < n_iterations ; k++){
-                            vertices[k] = new THREE.Vector3(radius*Math.cos(teta), radius*Math.sin(teta),0);
-                            new_vertices[k]=vertices[k].applyProjection(matriz_t);
-                            teta = teta + dTeta;
+                        var n_iradius = 900;
+                        var dR = radius/n_iradius;
+                        var R = dR/2;
+                        var inte = 0;
+                        for(var l = 0; l < n_iradius ; l++){
+                            var teta = 0;
+                            var dTeta = 2*Math.PI/n_iterations;
+                            for(var k = 0; k < n_iterations ; k++){
+                                vertices[inte] = new THREE.Vector3(R*Math.cos(teta), R*Math.sin(teta),0);
+                                new_vertices[inte]=vertices[inte].applyProjection(matriz_t);
+                                teta = teta + dTeta;
+                                inte++;
+                            }
+                            R = R + dR;
                         }  
                     break;
                 }
@@ -288,14 +302,21 @@ function calcPot(){
                     break;
                     case "disc":
                         var radius = objects[j].raio;
-                        alert("ERRO: disc");
                         var n_iterations = 1000;
-                        var teta = 0;
-                        var dTeta = 2*Math.PI/n_iterations; 
-                        for(var k = 0; k < n_iterations ; k++){
-                            vertices[k] = new THREE.Vector3(radius*Math.cos(teta), radius*Math.sin(teta),0);
-                            new_vertices[k]=vertices[k].applyProjection(matriz_t);
-                            teta = teta + dTeta;
+                        var n_iradius = 900;
+                        var dR = radius/n_iradius;
+                        var R = dR/2;
+                        var inte = 0;
+                        for(var l = 0; l < n_iradius ; l++){
+                            var teta = 0;
+                            var dTeta = 2*Math.PI/n_iterations;
+                            for(var k = 0; k < n_iterations ; k++){
+                                vertices[inte] = new THREE.Vector3(R*Math.cos(teta), R*Math.sin(teta),0);
+                                new_vertices[inte]=vertices[inte].applyProjection(matriz_t);
+                                teta = teta + dTeta;
+                                inte++;
+                            }
+                            R = R + dR;
                         }  
                     break;
                 }
@@ -395,14 +416,21 @@ function calcJob(i_initial, i_final){
                     break;
                     case "disc":
                         var radius = objects[j].raio;
-                        alert("ERRO: disc");
                         var n_iterations = 1000;
-                        var teta = 0;
-                        var dTeta = 2*Math.PI/n_iterations; 
-                        for(var k = 0; k < n_iterations ; k++){
-                            vertices[k] = new THREE.Vector3(radius*Math.cos(teta), radius*Math.sin(teta),0);
-                            new_vertices[k]=vertices[k].applyProjection(matriz_t);
-                            teta = teta + dTeta;
+                        var n_iradius = 900;
+                        var dR = radius/n_iradius;
+                        var R = dR/2;
+                        var inte = 0;
+                        for(var l = 0; l < n_iradius ; l++){
+                            var teta = 0;
+                            var dTeta = 2*Math.PI/n_iterations;
+                            for(var k = 0; k < n_iterations ; k++){
+                                vertices[inte] = new THREE.Vector3(R*Math.cos(teta), R*Math.sin(teta),0);
+                                new_vertices[inte]=vertices[inte].applyProjection(matriz_t);
+                                teta = teta + dTeta;
+                                inte++;
+                            }
+                            R = R + dR;
                         }  
                     break;
                 }

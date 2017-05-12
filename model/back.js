@@ -192,6 +192,12 @@ function calcPotecialPonto(ponto, listaObjView, listaObjModel){
         return this.vetor;
 }
 
+
+
+
+
+
+
 function calcPotencialAnel(p_click, p_obj, raio, carga){
 
   	var nIteracoes = 1000;

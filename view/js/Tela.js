@@ -98,8 +98,11 @@ function _insert(objDiv){
         this.px = document.getElementById('pxr').value;
         this.py = document.getElementById('pyr').value;
         this.pz = document.getElementById('pzr').value;
+        this.rpx = document.getElementById('rxd').value;
+        this.rpy = document.getElementById('ryd').value;
+        this.rpz = document.getElementById('rzd').value;
         this.carga = document.getElementById('cargar').value;   
-        obj = new RingView(parseFloat(this.raio),parseFloat(this.carga),parseFloat(this.px),parseFloat(this.py),parseFloat(this.pz));
+        obj = new RingView(parseFloat(this.raio),parseFloat(this.carga),parseFloat(this.px),parseFloat(this.py),parseFloat(this.pz), parseFloat(this.rpx),parseFloat(this.rpy),parseFloat(this.rpz));
         tela.cena3D.addObject(obj);
     }
     if(objDiv == "popupLine"){
@@ -107,8 +110,11 @@ function _insert(objDiv){
         this.px = document.getElementById('pxl').value;
         this.py = document.getElementById('pyl').value;
         this.pz = document.getElementById('pzl').value;
+        this.rpx = document.getElementById('rxdl').value;
+        this.rpy = document.getElementById('rydl').value;
+        this.rpz = document.getElementById('rzdl').value;
         this.carga = document.getElementById('cargal').value;   
-        obj = new LineView(parseFloat(this.length),parseFloat(this.carga),parseFloat(this.px),parseFloat(this.py),parseFloat(this.pz));
+        obj = new LineView(parseFloat(this.length),parseFloat(this.carga),parseFloat(this.px),parseFloat(this.py),parseFloat(this.pz), parseFloat(this.rpx),parseFloat(this.rpy),parseFloat(this.rpz));
         tela.cena3D.addObject(obj);
     }
     if(objDiv == "popupDisc"){
@@ -116,8 +122,11 @@ function _insert(objDiv){
         this.px = document.getElementById('pxdi').value;
         this.py = document.getElementById('pydi').value;
         this.pz = document.getElementById('pzdi').value;
+        this.rpx = document.getElementById('rxdi').value;
+        this.rpy = document.getElementById('rydi').value;
+        this.rpz = document.getElementById('rzdi').value;
         this.carga = document.getElementById('cargadi').value;   
-        obj = new DiscView(parseFloat(this.raio),parseFloat(this.carga),parseFloat(this.px),parseFloat(this.py),parseFloat(this.pz));
+        obj = new DiscView(parseFloat(this.raio),parseFloat(this.carga),parseFloat(this.px),parseFloat(this.py),parseFloat(this.pz), parseFloat(this.rpx),parseFloat(this.rpy),parseFloat(this.rpz));
         tela.cena3D.addObject(obj);
     }
     //controlador.objeto.addObjetoModel("ponto", parseFloat(this.carga));

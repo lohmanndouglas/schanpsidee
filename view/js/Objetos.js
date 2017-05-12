@@ -1,5 +1,5 @@
 // define a classe Anel
-var RingView = function(raio,carga,px,py,pz) { 
+var RingView = function(raio,carga,px,py,pz,rpx,rpy,rpz) { 
     var torusGeometry = new THREE.TorusGeometry(raio, 0.4, 20, 60, Math.PI*5 ); 
     var torusMaterial = new THREE.MeshLambertMaterial({color: 0xff0000,wireframe: true});
     var torus = new THREE.Mesh(torusGeometry, torusMaterial);
@@ -9,7 +9,9 @@ var RingView = function(raio,carga,px,py,pz) {
     torus.raio = raio;
     torus.carga = carga;
     torus.name = "ring";
-    torus.rotation.y = Math.PI / 2;
+    torus.rotation.x = rpx;
+    torus.rotation.y = rpy;
+    torus.rotation.z = rpz;
     return torus;
 }
 
@@ -38,7 +40,7 @@ var ChargeView = function(raio,carga,px,py,pz) {
     return sphere;
 }
 
-var DiscView = function(raio,carga,px,py,pz){
+var DiscView = function(raio,carga,px,py,pz,rpx,rpy,rpz){
     
     var geometry = new THREE.CircleGeometry(raio, 100);
     var material = new THREE.MeshBasicMaterial( { color: 0x00FFFF} );
@@ -49,7 +51,9 @@ var DiscView = function(raio,carga,px,py,pz){
     circle.position.z = pz;
     circle.raio = raio;
     circle.carga = carga;
-    circle.rotation.y = Math.PI / 2;
+    circle.rotation.x = rpx;
+    circle.rotation.y = rpy;
+    circle.rotation.z = rpz;
     circle.name = "disc";
     // var geo = new THREE.WireframeGeometry( circle.geometry ); // or WireframeGeometry
     // var mat = new THREE.LineBasicMaterial( { color: 0x000000, linewidth: 1 } );
@@ -58,8 +62,8 @@ var DiscView = function(raio,carga,px,py,pz){
     return circle;
 }
 
-var LineView = function(raio,carga,px,py,pz){
-
+var LineView = function(raio,carga,px,py,pz,rpx,rpy,rpz){
+	alert(rpx+","+rpy+","+rpz);
     var geometry = new THREE.CylinderGeometry( 0.7, 0.7, raio, 32 );
     var material = new THREE.MeshBasicMaterial( { color: 0xFF4500} );
     var disco = new THREE.Mesh( geometry, material );
@@ -69,7 +73,9 @@ var LineView = function(raio,carga,px,py,pz){
     disco.raio = raio;
     disco.carga = carga;
     disco.name = "line";
-    disco.rotation.z = Math.PI / 2;
+    disco.rotation.x = rpx;
+    disco.rotation.y = rpy;
+    disco.rotation.z = rpz;
     return disco;
 }
 
