@@ -75,8 +75,8 @@ function calcField() {
                     break;
                     case "disc":
                         var radius = objects[j].raio;
-                        var n_iterations = 1000;
-                        var n_iradius = 900;
+                        var n_iterations = 2;
+                        var n_iradius = 1000;
                         var dR = radius/n_iradius;
                         var R = dR/2;
                         var inte = 0;
@@ -84,11 +84,14 @@ function calcField() {
                             var teta = 0;
                             var dTeta = 2*Math.PI/n_iterations;
                             for(var k = 0; k < n_iterations ; k++){
+                                // alert("teta : "+teta+"R : "+R);
                                 vertices[inte] = new THREE.Vector3(R*Math.cos(teta), R*Math.sin(teta),0);
+                                //alert("x: "+vertices[inte].x+" y: "+vertices[inte].y+" z: "+vertices[inte].z);
                                 new_vertices[inte]=vertices[inte].applyProjection(matriz_t);
                                 teta = teta + dTeta;
                                 inte++;
                             }
+                            n_iterations = n_iterations+4;
                             R = R + dR;
                         }  
                     break;
@@ -97,7 +100,11 @@ function calcField() {
                 // for(k = 0; k < n_iterations ; k++){
                 //     new_vertices[k]=vertices[k].applyProjection(matriz_t);
                 // }
-                
+                alert("n pontos: "+vertices.length);
+                // alert("x: "+vertices[0].x+" y: "+vertices[0].y+" z: "+vertices[0].z);
+                // alert("x: "+vertices[1].x+" y: "+vertices[1].y+" z: "+vertices[1].z);
+                // alert("x: "+vertices[2].x+" y: "+vertices[2].y+" z: "+vertices[2].z);
+                // alert("x: "+vertices[3].x+" y: "+vertices[3].y+" z: "+vertices[3].z);
                 resultant_vector = calc_eletric_fild(new_vertices, Dot_POSITION, charge);
                 total.add(resultant_vector);
             }
