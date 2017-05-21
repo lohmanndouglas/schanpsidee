@@ -500,6 +500,16 @@ var Cena3D = function(div) {
         console.log("click");
     }
 
+
+
+ /*
+  *
+  ******************************************************************************************
+  * 
+  *
+  */
+
+
     function onDocumentDoubleClick( event ){
 
         // raycaster.setFromCamera( mouse, camera );
@@ -555,33 +565,6 @@ var Cena3D = function(div) {
             // document.getElementById('cargaCena').value = this.carga;
         }
     }
-
-        // keyboards events
-    document.addEventListener('keydown', function(event) {
-        if(event.keyCode == 37) {
-            teta += 0.1;
-            camera.position.z = Math.abs(zoom) * Math.sin(teta);
-            camera.position.x = Math.abs(zoom) * Math.cos(teta);
-            camera.lookAt(scene.position);
-        }else if(event.keyCode == 39) {
-            teta -= 0.1;
-            camera.position.z = Math.abs(zoom) * Math.sin(teta);
-            camera.position.x = Math.abs(zoom) * Math.cos(teta);
-            camera.lookAt(scene.position);
-        }
-        if(event.keyCode == 38) {
-            zoom = camera.position.x;
-            zoom -= 2;
-            camera.position.x = zoom;
-            camera.lookAt(scene.position);
-        }
-        if(event.keyCode == 40) {
-            zoom = camera.position.x;
-            zoom += 2;
-            camera.position.x = zoom;
-            camera.lookAt(scene.position);
-        }       
-     });
  }
 
 function change(){        
@@ -595,7 +578,6 @@ function remove(){
 }
 
 function fecharPop(){
-
     // document.getElementById('popupCena').style.display = 'none';
     // document.getElementById('divTrans').style.display = 'none';
     tela.cena3D.atualizaLabels();        

@@ -95,7 +95,7 @@ var version = "0.0.005";
   }
  // for show properties
   var varPopShowObjectMenu = null;
-  function createObjectMenu_no(){
+  function createShowObjectMenu_no(){
     lil.http.get("menu_show_type.html?" + version,{
         headers: { "Content-Type": "text" }
     }, function(err, res) {
@@ -107,7 +107,7 @@ var version = "0.0.005";
   }
 
   var varPopShowObjectMenuCirc = null;
-  function createObjectMenu_circ(){
+  function createShowObjectMenu_circ(){
     lil.http.get("menu_show_type_circ.html?" + version,{
         headers: { "Content-Type": "text" }
     }, function(err, res) {
@@ -119,7 +119,7 @@ var version = "0.0.005";
   }
 
   var varPopShowObjectMenuLine = null;
-  function createObjectMenu_line(){
+  function createShowObjectMenu_line(){
     lil.http.get("menu_show_type_line.html?" + version,{
         headers: { "Content-Type": "text" }
     }, function(err, res) {
