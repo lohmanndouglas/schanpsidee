@@ -63,7 +63,6 @@ var DiscView = function(raio,carga,px,py,pz,rpx,rpy,rpz){
 }
 
 var LineView = function(raio,carga,px,py,pz,rpx,rpy,rpz){
-	alert(rpx+","+rpy+","+rpz);
     var geometry = new THREE.CylinderGeometry( 0.7, 0.7, raio, 32 );
     var material = new THREE.MeshBasicMaterial( { color: 0xFF4500} );
     var disco = new THREE.Mesh( geometry, material );

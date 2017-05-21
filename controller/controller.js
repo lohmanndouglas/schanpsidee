@@ -100,7 +100,7 @@ function calcField() {
                 // for(k = 0; k < n_iterations ; k++){
                 //     new_vertices[k]=vertices[k].applyProjection(matriz_t);
                 // }
-                alert("n pontos: "+vertices.length);
+                // alert("n pontos: "+vertices.length);
                 // alert("x: "+vertices[0].x+" y: "+vertices[0].y+" z: "+vertices[0].z);
                 // alert("x: "+vertices[1].x+" y: "+vertices[1].y+" z: "+vertices[1].z);
                 // alert("x: "+vertices[2].x+" y: "+vertices[2].y+" z: "+vertices[2].z);
