@@ -73,6 +73,8 @@ function imgSelect() {
   for (i = 0; i < texts.length; i++) {
     if (texts[i].getAttribute("name") == selecteds) {
       texts[i].setAttribute("state", "show");
+        var isPopupWork = document.getElementById('menu_demo_var');
+        if (isPopupWork) isPopupWork.innerHTML = "";
       switch (selecteds) {
         case "dcharge":
           document.getElementById("menu_demo").innerHTML = varPopObjectMenu;
