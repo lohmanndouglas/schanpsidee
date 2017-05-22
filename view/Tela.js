@@ -5,6 +5,14 @@ var Tela = function() {
 
 var menuNumbers = null;
 
+
+ /*!
+ * 
+ * This method is called when click in object in main scene 
+ * is push
+ *
+ */
+
 function addObjectPopUp() {
   callPopUp(addPopUpContent);
 
@@ -91,6 +99,9 @@ function imgSelect() {
           setNumbersInMenu(document.getElementById("scene_nums"), 4);
           menuNumbers = document.getElementById("scene_nums");
         break;
+        case "work":
+          document.getElementById("menu_demo_var").innerHTML = varPopWorkMenu;
+        break;
       }
     } else {
       texts[i].setAttribute("state", "hide");
@@ -124,7 +135,11 @@ function calcObjetct() {
 
 var popUpDialog = null;
 function callPopUp(value) {
-  document.getElementById('popupCena').setAttribute("state","hide");
+
+  var isPopupCena = document.getElementById('popupCena');
+  if (isPopupCena) isPopupCena.setAttribute("state","hide");
+  
+
   if (!popUpDialog) {
     popUpDialog = document.getElementsByClassName("page_block")[0];
   }
@@ -342,3 +357,45 @@ function calculaTrabalhoBotao() {
   calcJob(posiaoI, posiaoF);
   _fecharPop();
 }
+
+
+
+    /*!
+     * This method show the properties of an object or dcharge 
+     * called when a dobble click in an object or dcharge is 
+     *
+     *
+    function onDocumentDoubleClick( event ){
+
+        var scene_objects = objetos.concat(pontos);
+        var intersectsObjetos = raycaster.intersectObjects( scene_objects );
+
+        if (intersectsObjetos.length > 0) {
+            OBJ = intersectsObjetos[0].object;
+            switch (OBJ.name) {
+                case "dcharge":
+                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenu;
+                    // get and set the properties
+                break;
+                case "dot":
+                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenu;
+                    // get and set the properties
+                break;
+                case "ring":
+                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenuCirc;
+                    // get and set the properties
+                break;
+                case "line":
+                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenuLine;
+                    // get and set the properties 
+                break;
+                case "disc":
+                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenuCirc;
+                    // get and set the properties
+                break;
+            }
+            document.getElementById('popupCena').setAttribute("state","show");;
+        }
+    }
+
+    */

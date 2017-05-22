@@ -38,7 +38,6 @@ var Cena3D = function(div) {
     renderer.domElement.addEventListener( 'mousedown', onDocumentMouseDown, false );
     renderer.domElement.addEventListener( 'mouseup', onDocumentMouseUp, false );
     renderer.domElement.addEventListener( 'dblclick', onDocumentDoubleClick, false);
-    renderer.domElement.addEventListener( 'click', onDocumentlick, false);
 
     var objetos = [];
     var pontos = [];
@@ -342,23 +341,20 @@ var Cena3D = function(div) {
     }
 
     function onDocumentMouseDown(event) {
-
         console.log("function onDocumentMouseDown");
         // console.log(mouse.x, mouse.y);
 
-        var intersectsInfo = raycaster.intersectObjects(vetorInfo);
+        document.getElementById("menu_show_demo").innerHTML = "";
 
-            var menubottom = document.getElementById('popupCena');
-            // var obj_info = document.getElementById('botton_menu');
-            // var cenas_positions = menubottom.getElementsByClassName('cenas_positions')[0];
-        
+        var intersectsInfo = raycaster.intersectObjects(vetorInfo);
+        //var menubottom = document.getElementById('popupCena');
 
         if (intersectsInfo.length > 0) {
 
             updateCamera = false;
 
             // cenas_positions.setAttribute("state","hide");
-            menubottom.setAttribute("state","show");
+          //  menubottom.setAttribute("state","show");
             // obj_info.setAttribute("state","show");
 
 
@@ -379,13 +375,13 @@ var Cena3D = function(div) {
             } else if(intersectsInfo[0].object.tipo == "W"){
 
                 v = parseFloat(intersectsInfo[0].object.valor.toFixed(4));
-                document.getElementById('popupCena').setAttribute("state","show");
+                //document.getElementById('popupCena').setAttribute("state","show");
 
                 //obj_info.innerHTML = "<span> Trabalho :<br>"+v.toPrecision(PRECISION)+" x10&#8315;&#8310; J </span> <br>";
 
             }else if(intersectsInfo[0].object.tipo == "V"){
                 v = parseFloat(intersectsInfo[0].object.valor.toFixed(4));
-                document.getElementById('popupCena').setAttribute("state","show");
+               // document.getElementById('popupCena').setAttribute("state","show");
                //obj_info.innerHTML ="<span > Potencial El&eacute;trico :"+v.toPrecision(PRECISION)+" V </span> <br>";
             }
         } else {
@@ -402,62 +398,7 @@ var Cena3D = function(div) {
                      offset.copy( intersects[ 0 ].point ).sub(plane.position);
                 }
             }
-            if(!SELECTED){
-                document.getElementById('popupCena').setAttribute("state","hide");
-
-            }
         }
-
-
-        //var div = document.getElementById('popupCena');
-        var intersectsObjetos = raycaster.intersectObjects( objetos );
-        var intersectsPontos = raycaster.intersectObjects( pontos );
-
-        if (intersectsObjetos.length > 0) {
-            OBJ = intersectsObjetos[0].object;
-            
-            // obj_info.setAttribute("state","hide");
-            // cenas_positions.setAttribute("state","show");
-            // div.setAttribute("state","show");
-            
-            this.i = 0;
-            for(this.i = 0; this.i < objetos.length; this.i++){
-                if(OBJ === objetos[this.i]){
-                    break;
-                }
-            }
-            this.carga = OBJ.carga;
-            // document.getElementById('ptx').value = OBJ.position.x;
-            // document.getElementById('pty').value = OBJ.position.y;
-            // document.getElementById('ptz').value = OBJ.position.z;  
-            // document.getElementById('cargaCena').value = this.carga;      
-        }
-        if (intersectsPontos.length > 0) {
-            OBJ = intersectsPontos[0].object;
-            
-            // obj_info.setAttribute("state","hide");
-            // cenas_positions.setAttribute("state","show");
-            // div.setAttribute("state","show");
-            
-             var div = document.getElementById('popupCena');
-             div.setAttribute("state","show");
-
-            this.i = 0;
-            for(this.i = 0; this.i < pontos.length; this.i++){
-                if(OBJ === pontos[this.i]){
-                    break;
-                }
-            }
-            // alert("position:"+this.i+", Ponto");
-            this.carga = OBJ.carga;
-
-            // document.getElementById('ptx').value = OBJ.position.x;
-            // document.getElementById('pty').value = OBJ.position.y;
-            // document.getElementById('ptz').value = OBJ.position.z;
-            // document.getElementById('cargaCena').value = this.carga;
-        }
-
-
     }
 
 
@@ -496,73 +437,42 @@ var Cena3D = function(div) {
         }
     }
 
-    function onDocumentlick(){
-        console.log("click");
-    }
 
-
-
- /*
-  *
-  ******************************************************************************************
-  * 
-  *
-  */
-
-
+    /*!
+     * This method show the properties of an object or dcharge 
+     * called when a dobble click in an object or dcharge is 
+     *
+     */
     function onDocumentDoubleClick( event ){
 
-        // raycaster.setFromCamera( mouse, camera );
-
-
-        var intersectsObjetos = raycaster.intersectObjects( objetos );
-        var intersectsPontos = raycaster.intersectObjects( pontos );
-
-         var div = document.getElementById('popupCena');
-        // var obj_info = document.getElementById('botton_menu');
-        // var cenas_positions = div.getElementsByClassName('cenas_positions')[0];
+        var scene_objects = objetos.concat(pontos);
+        var intersectsObjetos = raycaster.intersectObjects( scene_objects );
 
         if (intersectsObjetos.length > 0) {
             OBJ = intersectsObjetos[0].object;
-            
-            // obj_info.setAttribute("state","hide");
-            // cenas_positions.setAttribute("state","show");
-             div.setAttribute("state","show");
-            
-            this.i = 0;
-            for(this.i = 0; this.i < objetos.length; this.i++){
-                if(OBJ === objetos[this.i]){
-                    break;
-                }
+            switch (OBJ.name) {
+                case "dcharge":
+                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenu;
+                    // get and set the properties
+                break;
+                case "dot":
+                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenu;
+                    // get and set the properties
+                break;
+                case "ring":
+                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenuCirc;
+                    // get and set the properties
+                break;
+                case "line":
+                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenuLine;
+                    // get and set the properties 
+                break;
+                case "disc":
+                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenuCirc;
+                    // get and set the properties
+                break;
             }
-            this.carga = OBJ.carga;
-            // document.getElementById('ptx').value = OBJ.position.x;
-            // document.getElementById('pty').value = OBJ.position.y;
-            // document.getElementById('ptz').value = OBJ.position.z;  
-            // document.getElementById('cargaCena').value = this.carga;      
-        }
-        if (intersectsPontos.length > 0) {
-            OBJ = intersectsPontos[0].object;
-            
-            // obj_info.setAttribute("state","hide");
-            // cenas_positions.setAttribute("state","show");
-            // div.setAttribute("state","show");
-            
-             var div = document.getElementById('popupCena');
-             div.setAttribute("state","show");
-
-            this.i = 0;
-            for(this.i = 0; this.i < pontos.length; this.i++){
-                if(OBJ === pontos[this.i]){
-                    break;
-                }
-            }
-            // alert("position:"+this.i+", Ponto");
-            this.carga = OBJ.carga;
-            // document.getElementById('ptx').value = OBJ.position.x;
-            // document.getElementById('pty').value = OBJ.position.y;
-            // document.getElementById('ptz').value = OBJ.position.z;
-            // document.getElementById('cargaCena').value = this.carga;
+            document.getElementById('popupCena').setAttribute("state","show");
         }
     }
  }

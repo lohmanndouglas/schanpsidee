@@ -37,6 +37,7 @@ var ChargeView = function(raio,carga,px,py,pz) {
     sphere.position.y = py;
     sphere.position.z = pz;
     sphere.carga = carga;
+    sphere.name = "dcharge";
     return sphere;
 }
 

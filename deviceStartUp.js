@@ -32,7 +32,14 @@ var version = "0.0.005";
         if (err) throw new Error("Cannot perform the request: " + err.status);
         if (res.status === 200 || res.status === 0) {
             addPopUpContent = res.data;
-            getCalcContent();        
+            getCalcContent(); 
+            createObjectMenu_no();
+            createObjectMenu_circ();
+            createObjectMenu_line(); 
+            createShowObjectMenu_no();
+            createShowObjectMenu_circ();
+            createShowObjectMenu_line();
+            createWorkMenu();      
         }
     });
 
@@ -49,15 +56,26 @@ var version = "0.0.005";
         if (res.status === 200 || res.status === 0) {
             varPopUpContent = res.data;
             createMenu();
-            createObjectMenu_no();
-            createObjectMenu_circ();
-            createObjectMenu_line();
+
         }
     });
 
   }
 
 // MY LOADER
+
+  var varPopWorkMenu = null;
+  function createWorkMenu(){
+    lil.http.get("work_menu.html?" + version,{
+        headers: { "Content-Type": "text" }
+    }, function(err, res) {
+        if (err) throw new Error("Cannot perform the request: " + err.status);
+        if (res.status === 200 || res.status === 0) {
+            varPopWorkMenu = res.data;
+        }
+    });
+  }
+
   var varPopObjectMenu = null;
   function createObjectMenu_no(){
     lil.http.get("menu_type.html?" + version,{
@@ -125,7 +143,7 @@ var version = "0.0.005";
     }, function(err, res) {
         if (err) throw new Error("Cannot perform the request: " + err.status);
         if (res.status === 200 || res.status === 0) {
-            varPopObjectMenuLine = res.data;
+            varPopShowObjectMenuLine = res.data;
         }
     });
   }

@@ -207,6 +207,23 @@ min-height: calc(100% - 1.6em);
 }
 
 
+.img_field{
+  content:url("../images/field.png");
+}
+
+.img_force{
+  content:url("../images/force.png");
+}
+
+.img_potential{
+  content:url("../images/potential.png");
+}
+
+.img_work{
+  content:url("../images/work.png");
+}
+
+
 .list_description_popup {
   padding: 0.1em 0em 0.4em 1em;
   width: 100%;
