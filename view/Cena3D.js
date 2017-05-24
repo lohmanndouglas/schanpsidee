@@ -75,10 +75,6 @@ var Cena3D = function(div) {
     var grid = new THREE.GridHelper(100, 10 , '0xffffff' , '0xffffff' );
     scene.add(grid);
 
-
-
-
-
     renderScene(); /* render scene */
 
     /** This is a render scene function. */
@@ -186,6 +182,7 @@ var Cena3D = function(div) {
     }
 
     this.addVetor = function(pInicial, Pfim, tipo){
+        alert("ini: "+pInicial+"fim: "+Pfim+"tipo: "+tipo);
         obj = new VetorView(pInicial, Pfim, tipo);
         scene.add(obj);
         vetores.push(obj);

@@ -112,10 +112,9 @@ function calcField() {
              * don't do the scale here (it's addvector function)
              * remove pI vector
              */
-            pI[0] = Dot_POSITION.x + (total.x/250);
-            pI[1] = Dot_POSITION.y + (total.y/250);
-            pI[2] = Dot_POSITION.z + (total.z/250);
-            tela.cena3D.addVetor(Dot_POSITION.toArray(), pI, "E");
+            total.divideScalar(250);
+            total.add(Dot_POSITION);
+            tela.cena3D.addVetor(Dot_POSITION.toArray(), total.toArray(), "E");
             tela.cena3D.addVetorInfo(Dot_POSITION.toArray(), pI, [total.x,total.y,total.z], "E");
     	}
     }
@@ -227,10 +226,9 @@ function calcForce(){
              * don't do the scale here (it's addvector function)
              * remove pI vector
              */
-            pI[0] = Dot_POSITION.x + (total.x*500);
-            pI[1] = Dot_POSITION.y + (total.y*500);
-            pI[2] = Dot_POSITION.z + (total.z*500);
-            tela.cena3D.addVetor(Dot_POSITION.toArray(), pI, "F");
+            total.multiplyScalar(500);
+            total.add(Dot_POSITION);
+            tela.cena3D.addVetor(Dot_POSITION.toArray(),total.toArray(), "F");
             tela.cena3D.addVetorInfo(Dot_POSITION.toArray(), pI, [total.x,total.y,total.z], "F");
         }
     }

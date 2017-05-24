@@ -103,6 +103,7 @@ function imgSelect() {
         break;
         case "work":
           document.getElementById("menu_demo_var").innerHTML = varPopWorkMenu;
+          setNumbersInJobMenu();
         break;
       }
     } else {
@@ -112,6 +113,24 @@ function imgSelect() {
   }
   document.querySelectorAll(".btn_add")[0].setAttribute("state", "enable");
 }
+
+
+ /*!
+ * This method set the dynamic 
+ * popup of dots on work window
+ *
+ */
+function setNumbersInJobMenu() {
+  var pts = tela.cena3D.listPontosView();
+  // alert("pts: "+pts);
+  for (var i = 0; i < pts.length; i++) { // for each dot 
+    initialSelect = document.getElementById('sleI');
+    finalSelect = document.getElementById('sleF');
+    initialSelect.options[initialSelect.options.length] = new Option("P"+i, i);
+    finalSelect.options[finalSelect.options.length] = new Option("P"+i, i);    
+  }
+}
+
 
 function calcPopUp() {
   callPopUp(varPopUpContent);
@@ -133,6 +152,23 @@ function calcPopUp() {
 
 function calcObjetct() {
   console.log("calcObjetct" + menuSelected);
+  var type = menuSelected.getAttribute("object_type");
+    switch (type) {
+      case "field":
+        calcField();
+      break;
+      case "force":
+        calcForce();
+      break;
+      case "potential":
+        calcPot();
+      break;
+      case "work":
+        var pi = document.getElementById('sleI').value;
+        var pf = document.getElementById('sleF').value;
+        calcJob(pi, pf);
+      break;
+    }
 }
 
 var popUpDialog = null;
@@ -225,32 +261,6 @@ function insertObject(nums, type) {
   return;
 }
 
-/* 
-    para cada ponto  do vetor pontos[]
-    	calcular campo de cada objeto do vetor objetos[]
-    	plotar vetor
-*/
-function _calcField() {
-  console.log("_calcField");
-  calcField();
-}
-
-function _calcPot() {
-  console.log("_calcPot");
-  calcPot();
-}
-
-function _calcForce() {
-  console.log("_calcForce");
-  calcForce();
-}
-
-function _calcJob() {
-  console.log("_calcJob");
-  limparCombo();
-  carregarCombo();
-}
-
 /** Functions related settings configuration*/
 function show_set_configuration() {
   document.getElementById("popupConfiguration").style.display = "block";
@@ -292,112 +302,3 @@ function _save_new_configuration() {
   tela.cena3D.drawAxes();
 }
 //end settings configurations
-
-/** Functions related with help menu*/
-
-// /** This function load dots to chose on job's pop-up */
-// function carregarCombo(){
-//     this.pts = tela.cena3D.listPontosView();
-
-// 	var comboInicial = document.getElementById("cboPincial");
-// 	var comboFinal = document.getElementById("cboPfinal");
-
-//    	for (this.i = 0; this.i < this.pts.length; this.i++) {
-//    	    var opt0 = document.createElement("option");
-//     	opt0.value = this.i;
-//     	opt0.text = "P"+this.i;
-//     	comboInicial.add(opt0, comboInicial.options[0]);
-//     	// comboFinal.add(opt0, comboFinal.options[0]);
-//    	};
-
-//    	for (this.i = 0; this.i < this.pts.length; this.i++) {
-//    		var opt0 = document.createElement("option");
-//     	opt0.value = this.i;
-//     	opt0.text = "P"+this.i;
-//     	// comboInicial.add(opt0, comboInicial.options[0]);
-//     	comboFinal.add(opt0, comboFinal.options[0]);
-//    	};
-
-//    	this.obj = tela.cena3D.listObjView();
-//    	if(this.pts.length > 0 && this.obj.length > 0){
-//    	   	abriPop();
-//    	}else if (this.pts.length < 1){
-//    		alert("Inserir Ponto");
-//    	} else if (this.obj.length < 1){
-//    		alert("Inserir Objeto");
-//    	}
-// }
-
-// function abriPop(){
-//     document.getElementById('comboBox').style.display = 'block';
-//     document.getElementById('divTrans').style.display = 'block';
-//     // var div = document.getElementById('popupCena');
-//     document.getElementById('comboBox').style.position = 'absolute';
-//     document.getElementById('comboBox').style.left = '950px';
-//     document.getElementById('comboBox').style.top = '150px';
-// }
-
-// function _fecharPop(){
-// 	document.getElementById('comboBox').style.display = 'none';
-//     document.getElementById('divTrans').style.display = 'none';
-// }
-
-/** This functions gets the initial and final dots and calls the math job function*/
-function calculaTrabalhoBotao() {
-  var comboInicial = document.getElementById("cboPincial");
-
-  var comboFinal = document.getElementById("cboPfinal");
-
-  posiaoI = comboInicial.options[comboInicial.selectedIndex].value;
-  posiaoF = comboFinal.options[comboFinal.selectedIndex].value;
-
-  // this.pts = tela1.cena3D.listPontosView();
-
-  // pIncial = [this.pts[posiaoI].position.x, this.pts[posiaoI].position.y, this.pts[posiaoI].position.z];
-  // pFinal = [this.pts[posiaoF].position.x, this.pts[posiaoF].position.y, this.pts[posiaoF].position.z];
-  /** Calls to calculates controler function*/
-  calcJob(posiaoI, posiaoF);
-  _fecharPop();
-}
-
-
-
-    /*!
-     * This method show the properties of an object or dcharge 
-     * called when a dobble click in an object or dcharge is 
-     *
-     *
-    function onDocumentDoubleClick( event ){
-
-        var scene_objects = objetos.concat(pontos);
-        var intersectsObjetos = raycaster.intersectObjects( scene_objects );
-
-        if (intersectsObjetos.length > 0) {
-            OBJ = intersectsObjetos[0].object;
-            switch (OBJ.name) {
-                case "dcharge":
-                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenu;
-                    // get and set the properties
-                break;
-                case "dot":
-                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenu;
-                    // get and set the properties
-                break;
-                case "ring":
-                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenuCirc;
-                    // get and set the properties
-                break;
-                case "line":
-                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenuLine;
-                    // get and set the properties 
-                break;
-                case "disc":
-                    document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenuCirc;
-                    // get and set the properties
-                break;
-            }
-            document.getElementById('popupCena').setAttribute("state","show");;
-        }
-    }
-
-    */
