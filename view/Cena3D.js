@@ -354,32 +354,34 @@ var Cena3D = function(div) {
           //  menubottom.setAttribute("state","show");
             // obj_info.setAttribute("state","show");
 
-
+            document.getElementById("menu_show_demo").innerHTML = '<div id="popupCena" class="popupCena" state="hide"><div id="menu_demo"></div></div>';
+            obj_info = document.getElementById("menu_demo");
             if(intersectsInfo[0].object.tipo == "E"){
-                x = parseFloat(intersectsInfo[0].object.valor[0].toFixed(5))
-                y = parseFloat(intersectsInfo[0].object.valor[1].toFixed(5))
-                z = parseFloat(intersectsInfo[0].object.valor[2].toFixed(5))
-
-                //obj_info.innerHTML = "<span > Vetor Campo El&eacute;trico:("+x.toPrecision(PRECISION)+", "+y.toPrecision(PRECISION)+", "+z.toPrecision(PRECISION)+") N/C </span><br>";
-
+                // alert(intersectsInfo[0].object.valor[0]);
+                x = parseFloat(intersectsInfo[0].object.valor[0]);
+                y = parseFloat(intersectsInfo[0].object.valor[1]);
+                z = parseFloat(intersectsInfo[0].object.valor[2]);
+                obj_info.innerHTML = "<span > Vetor Campo El&eacute;trico:("+x.toPrecision(PRECISION)+", "+y.toPrecision(PRECISION)+", "+z.toPrecision(PRECISION)+") N/C </span><br>";
+                document.getElementById('popupCena').setAttribute("state","show");
             } else if(intersectsInfo[0].object.tipo == "F"){
-                x = parseFloat(intersectsInfo[0].object.valor[0].toFixed(5))
-                y = parseFloat(intersectsInfo[0].object.valor[1].toFixed(5))
-                z = parseFloat(intersectsInfo[0].object.valor[2].toFixed(5))
+                x = parseFloat(intersectsInfo[0].object.valor[0])
+                y = parseFloat(intersectsInfo[0].object.valor[1])
+                z = parseFloat(intersectsInfo[0].object.valor[2])
                
-                //obj_info.innerHTML = "<span > Vetor For&ccedil;a El&eacute;trico :("+x.toPrecision(PRECISION)+", "+y.toPrecision(PRECISION)+", "+z.toPrecision(PRECISION)+") N </span> <br>";
-
+                obj_info.innerHTML = "<span > Vetor For&ccedil;a El&eacute;trico :("+x.toPrecision(PRECISION)+", "+y.toPrecision(PRECISION)+", "+z.toPrecision(PRECISION)+") N </span> <br>";
+                document.getElementById('popupCena').setAttribute("state","show");
             } else if(intersectsInfo[0].object.tipo == "W"){
 
                 v = parseFloat(intersectsInfo[0].object.valor.toFixed(4));
                 //document.getElementById('popupCena').setAttribute("state","show");
 
-                //obj_info.innerHTML = "<span> Trabalho :<br>"+v.toPrecision(PRECISION)+" x10&#8315;&#8310; J </span> <br>";
-
+                obj_info.innerHTML = "<span> Trabalho :<br>"+v.toPrecision(PRECISION)+" x10&#8315;&#8310; J </span> <br>";
+                document.getElementById('popupCena').setAttribute("state","show");
             }else if(intersectsInfo[0].object.tipo == "V"){
                 v = parseFloat(intersectsInfo[0].object.valor.toFixed(4));
                // document.getElementById('popupCena').setAttribute("state","show");
-               //obj_info.innerHTML ="<span > Potencial El&eacute;trico :"+v.toPrecision(PRECISION)+" V </span> <br>";
+               obj_info.innerHTML ="<span > Potencial El&eacute;trico :"+v.toPrecision(PRECISION)+" V </span> <br>";
+               document.getElementById('popupCena').setAttribute("state","show");
             }
         } else {
             updateCamera = true;
@@ -442,6 +444,7 @@ var Cena3D = function(div) {
      */
     function onDocumentDoubleClick( event ){
 
+        updateCamera = false;
         var scene_objects = objetos.concat(pontos);
         var intersectsObjetos = raycaster.intersectObjects( scene_objects );
 
@@ -470,6 +473,8 @@ var Cena3D = function(div) {
                 break;
             }
             document.getElementById('popupCena').setAttribute("state","show");
+        } else {
+           updateCamera = true; 
         }
     }
  }
