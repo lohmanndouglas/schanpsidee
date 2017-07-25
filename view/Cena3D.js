@@ -453,6 +453,7 @@ var Cena3D = function(div) {
             switch (OBJ.name) {
                 case "dcharge":
                     document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenu;
+                    setNumbersInMenu(document.getElementById("scene_nums"), 5);
                     // get and set the properties
                 break;
                 case "dot":
