@@ -4,7 +4,7 @@ Lohmann, Douglas. Development and Evaluation of a Simulator for Electrostatic Te
 
 ### What is Schanpsidee?  
 
-Schanpsidee is a simulator applied to electrostatic content, which permits to obtain the electric field of the ring geometry, disk and line, at any point in three-dimensional space. Other physical quantities such as Electrical Force, Work and the Electrical Potential can also be obtained through this simulator.
+Schanpsidee is a simulator applied to electrostatic content, which permits to obtain the electric field of the ring geometry, disk and line, at any point in three-dimensional space. Other physics quantities such as Electrical Force, Work and the Electrical Potential can also be obtained through this simulator.
 
 ### How to use
 Instructions to use the simulator.
@@ -51,7 +51,7 @@ Licenses:
  Maintainers:
  - This implementation is maintained by Douglas Lohmann. Any questions or suggestions send him an email: <dlohmann0@gmail.com>.
 
- - This simulator was built with the help of Professor Dr. Cesar Vanderlei Deimling, all necessary support for understanding the physical principles were offered by him.
+ - This simulator was built with the help of Professor Dr. Cesar Vanderlei Deimling, all necessary support for understanding the physics principles were offered by him.
 
 --------------------
 ##### LABELS

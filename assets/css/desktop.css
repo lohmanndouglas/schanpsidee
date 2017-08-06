@@ -40,6 +40,7 @@ main{
   width: -o-calc(10% - 15px);
   width: calc(10% - 15px);
   margin: 7px;
+  cursor: pointer;
 }
 
 .col_objetos.active{
@@ -89,7 +90,7 @@ header img{
   cursor: pointer;
 }
 
-.img_world{
+/* .img_world{
   content:url("../images/world.png");
 }
 
@@ -99,7 +100,17 @@ header img{
 
 .img_help{
   content:url("../images/help.png");
+} */
+
+
+.tutorial h1, .tutorial h2, .tutorial h3, .tutorial h4, .tutorial p, .tutorial span, .tutorial label, .tutorial small    {
+  color: white;
 }
+.tutorial span{
+  font-size: 70%;
+  background-color: #296288;
+}
+
 
 .menu_button{
   padding: 5px;
@@ -186,7 +197,7 @@ min-height: calc(100% - 1.6em);
 
 }
 
-.img_dcharge{
+/* .img_dcharge{
   content:url("../images/dcharge.png");
 }
 
@@ -204,7 +215,7 @@ min-height: calc(100% - 1.6em);
 
 .img_disc{
   content:url("../images/disc.png");
-}
+} 
 
 
 .img_field{
@@ -222,6 +233,7 @@ min-height: calc(100% - 1.6em);
 .img_work{
   content:url("../images/work.png");
 }
+*/
 
 
 .list_description_popup {
@@ -278,13 +290,13 @@ min-height: calc(100% - 1.6em);
     width: 42%;
     background: #296288;
     margin: 0px 3px;
-    border-radius: 5px;
+    border-radius: 2px;
 }
 
 .scene_group h4{
- text-align: center;
- padding: 0px;
- margin: 0.3em;
+    text-align: left;
+    padding: 0px;
+    margin: 0.3em;
 }
 
 .scene_carga{
@@ -359,14 +371,15 @@ background:#296288;
     -webkit-align-content: center;
     -ms-flex-line-pack: center;
     align-content: center;
-    text-align: right;
+    text-align: center;
     justify-content: center;
     align-items: center;
     background: #296288;
-    padding: 0.6em 0px;
+    padding: 0.8em 0px 0.2em;
     color: white;
     line-height: 1.8em;
     width: 100%;
+    height: 2.4em;
 }
 
 
@@ -392,14 +405,18 @@ background:#296288;
 }
 
 .popupCena input{
-  width: 50%;
-     background: #178cda;
+    background: #178cda;
     height: 2em;
     text-align: center;
-    width: 100%;
+    width: 90%;
     border: none;
     color: #fff;
     font-weight: 600;
+}
+.popupCena small{
+  position: absolute;
+  margin-left: 0.9em;
+  color: white;
 }
 
 .popupCena p{
@@ -410,11 +427,28 @@ background:#296288;
 }
 
  .popupCena h4{
-    margin: 0px;
-    padding: 0.05em 1em;
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+    /* margin: 0.3em 0px 0.1em; */
+    padding: 0px;
+    line-height: 80%;
+    width: 92%;
     /* left: 0.5em; */
     color: #178cda;
     background: #296288;
+ }
+ .popupCena h4 small{
+    color: #178cda;
+
+}
+
+ .popupCena .scene_group{
+  width: 30%;
+  margin: 0px 0.5em;
+ } 
+ .popupCena .scene_carga{
+  width: 9%;
+
  }
 
  .titulo_popup{
@@ -424,12 +458,53 @@ background:#296288;
  }
 
  .popupcena_button{
-    padding: 0.2em 0.5em;
+    padding: 0.7em 0.5em;
     background: #178cda;
     color: white;
     cursor: pointer;
     font-size: 80%;
     line-height: 160%;
-    margin: 0px;
+    margin: 0px 0.5em;
  }
 
+
+
+.scene_work .scene_group{
+  width: 48%;
+  margin: 0px 1%;
+}
+ 
+select {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  background-color: #0099ff;
+  color: white;
+  padding: 0.5em;
+  border: none;
+  margin: 2%;
+  border: 0 !important;  
+	-webkit-appearance: none;  
+  -moz-appearance: none;
+  text-align: center;
+}
+
+option{
+  text-align: center;
+  padding: 0.5em;
+  margin: 0.5em;
+  width: 100%;
+  height: 4em;
+}
+
+.popupConfiguration{
+  color: white;
+}
+
+.popupConfiguration .grid{
+  justify-content: flex-start;
+}
+
+.popupConfiguration select{
+  margin: 0px 1.5em;
+}

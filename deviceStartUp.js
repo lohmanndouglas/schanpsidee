@@ -1,5 +1,8 @@
 var _deviceStartUp, _logo, application;
 //var tela = null;
+var currentLang = "pt";
+var templatePatch = "./assets/template/"
+
 var version = "0.0.005";
   function bodyLoaded(){
       if(_deviceStartUp)return;
@@ -10,6 +13,9 @@ var version = "0.0.005";
   var addPopUpContent =null;
 
   function onSplashReady(){
+    setRoutes();
+    var prst = document.getElementById('present')
+    if(prst)prst.innerHTML = getPresentContentByLang(currentLang);
     if(webglAvailable){
         _deviceStartUp.loadDependencies();
     }else{
@@ -25,20 +31,24 @@ var version = "0.0.005";
             setTimeout(onAppReady, 1000 );
             return;
     }
+
     
-    lil.http.get("add_popup.html?" + version,{
+    lil.http.get( templatePatch + currentLang + "/add_popup.html?" + version,{
         headers: { "Content-Type": "text" }
     }, function(err, res) {
         if (err) throw new Error("Cannot perform the request: " + err.status);
         if (res.status === 200 || res.status === 0) {
             addPopUpContent = res.data;
-            getCalcContent(); 
+            createTutorial();
+            getCalcContent();
             createObjectMenu_no();
             createObjectMenu_circ();
             createObjectMenu_line(); 
             createShowObjectMenu_no();
             createShowObjectMenu_circ();
             createShowObjectMenu_line();
+            createShowPopSettings();
+            createShowPopAjuda();
             createWorkMenu();      
         }
     });
@@ -47,9 +57,22 @@ var version = "0.0.005";
     
   };
 
+  function getPresentContentByLang(langs){
+    return langs === "en" ? '<h3>schanpsidee</h3><span>Schanpsidee is a simulator applied to electrostatic content.</span>' :
+                            '<h3>schanpsidee</h3><span>Schanpsidee é um simulador aplicado ao conteúdo eletrostático.</span>'
+  }
+
+  function changeLang(langs){
+    console.log(langs);
+    currentLang = langs;
+    //window.location.href = window.location.host+"/#"+currentLang;
+    window.location.hash = "#"+currentLang;
+    window.location.reload();
+  }
+
   var varPopUpContent = null;
   function getCalcContent(){
-    lil.http.get("var_popup.html?" + version,{
+    lil.http.get( templatePatch + currentLang + "/var_popup.html?" + version,{
         headers: { "Content-Type": "text" }
     }, function(err, res) {
         if (err) throw new Error("Cannot perform the request: " + err.status);
@@ -62,11 +85,64 @@ var version = "0.0.005";
 
   }
 
+
+   function setRoutes() {
+       if(!window.location.hash){
+        currentLang = "pt";
+        setQueryString("pt");
+       }else{
+        currentLang = window.location.hash.replace("#","");
+        currentLang = currentLang !== "pt" &&  currentLang !== "en" ? "pt" : currentLang;
+       }
+
+        // var searchs = parseQueryString();
+        // if (searchs.hasOwnProperty("en")) {
+        //    currentLang  ="en";
+        // }else if (searchs.hasOwnProperty("en")) {
+        //    currentLang  ="pt";
+        // }else{
+        //     currentLang = "pt";
+        // }
+        // setQueryString(currentLang);
+
+     }
+
+     function setQueryString(value){
+       window.location.hash = value;
+     }
+
+
+    function parseQueryString() {
+
+        var str = window.location.search;
+        var objURL = {};
+
+        str.replace(
+            new RegExp("([^?=&]+)(=([^&]*))?", "g"),
+            function ($0, $1, $2, $3) {
+                objURL[$1] = $3;
+            }
+        );
+        return objURL;
+    };
+
 // MY LOADER
+
+  var varPopTutorial = null;
+  function createTutorial(){
+    lil.http.get( templatePatch + currentLang + "/tutorial.html?" + version,{
+        headers: { "Content-Type": "text" }
+    }, function(err, res) {
+        if (err) throw new Error("Cannot perform the request: " + err.status);
+        if (res.status === 200 || res.status === 0) {
+            varPopTutorial = res.data;
+        }
+    });
+  }
 
   var varPopWorkMenu = null;
   function createWorkMenu(){
-    lil.http.get("work_menu.html?" + version,{
+    lil.http.get( templatePatch + currentLang + "/work_menu.html?" + version,{
         headers: { "Content-Type": "text" }
     }, function(err, res) {
         if (err) throw new Error("Cannot perform the request: " + err.status);
@@ -78,7 +154,7 @@ var version = "0.0.005";
 
   var varPopObjectMenu = null;
   function createObjectMenu_no(){
-    lil.http.get("menu_type.html?" + version,{
+    lil.http.get( templatePatch + currentLang + "/menu_type.html?" + version,{
         headers: { "Content-Type": "text" }
     }, function(err, res) {
         if (err) throw new Error("Cannot perform the request: " + err.status);
@@ -90,7 +166,7 @@ var version = "0.0.005";
 
   var varPopObjectMenuCirc = null;
   function createObjectMenu_circ(){
-    lil.http.get("menu_type_circ.html?" + version,{
+    lil.http.get( templatePatch + currentLang + "/menu_type_circ.html?" + version,{
         headers: { "Content-Type": "text" }
     }, function(err, res) {
         if (err) throw new Error("Cannot perform the request: " + err.status);
@@ -102,7 +178,7 @@ var version = "0.0.005";
 
   var varPopObjectMenuLine = null;
   function createObjectMenu_line(){
-    lil.http.get("menu_type_line.html?" + version,{
+    lil.http.get( templatePatch + currentLang + "/menu_type_line.html?" + version,{
         headers: { "Content-Type": "text" }
     }, function(err, res) {
         if (err) throw new Error("Cannot perform the request: " + err.status);
@@ -114,7 +190,7 @@ var version = "0.0.005";
  // for show properties
   var varPopShowObjectMenu = null;
   function createShowObjectMenu_no(){
-    lil.http.get("menu_show_type.html?" + version,{
+    lil.http.get( templatePatch + currentLang + "/menu_show_type.html?" + version,{
         headers: { "Content-Type": "text" }
     }, function(err, res) {
         if (err) throw new Error("Cannot perform the request: " + err.status);
@@ -126,7 +202,7 @@ var version = "0.0.005";
 
   var varPopShowObjectMenuCirc = null;
   function createShowObjectMenu_circ(){
-    lil.http.get("menu_show_type_circ.html?" + version,{
+    lil.http.get( templatePatch + currentLang + "/menu_show_type_circ.html?" + version,{
         headers: { "Content-Type": "text" }
     }, function(err, res) {
         if (err) throw new Error("Cannot perform the request: " + err.status);
@@ -138,7 +214,7 @@ var version = "0.0.005";
 
   var varPopShowObjectMenuLine = null;
   function createShowObjectMenu_line(){
-    lil.http.get("menu_show_type_line.html?" + version,{
+    lil.http.get( templatePatch + currentLang + "/menu_show_type_line.html?" + version,{
         headers: { "Content-Type": "text" }
     }, function(err, res) {
         if (err) throw new Error("Cannot perform the request: " + err.status);
@@ -147,10 +223,34 @@ var version = "0.0.005";
         }
     });
   }
+ 
+  var varPopSettings = null;
+  function createShowPopSettings(){
+    lil.http.get( templatePatch + currentLang + "/setts.html?" + version,{
+        headers: { "Content-Type": "text" }
+    }, function(err, res) {
+        if (err) throw new Error("Cannot perform the request: " + err.status);
+        if (res.status === 200 || res.status === 0) {
+            varPopSettings = res.data;
+        }
+    });
+  }
+
+  var varPopAjuda = null;
+  function createShowPopAjuda(){
+    lil.http.get( templatePatch + currentLang + "/ajuda.html?" + version,{
+        headers: { "Content-Type": "text" }
+    }, function(err, res) {
+        if (err) throw new Error("Cannot perform the request: " + err.status);
+        if (res.status === 200 || res.status === 0) {
+            varPopAjuda = res.data;
+        }
+    });
+  }
   //_-------------------
 
   function createMenu(){
-    lil.http.get("header_menu.html?" + version,{
+    lil.http.get( templatePatch + currentLang + "/header_menu.html?" + version,{
         headers: { "Content-Type": "text" }
     }, function(err, res) {
         if (err) throw new Error("Cannot perform the request: " + err.status);
@@ -166,7 +266,7 @@ var version = "0.0.005";
      document.getElementsByTagName("header")[0].innerHTML = "";
      document.getElementsByTagName("header")[0].innerHTML = data;
      document.getElementsByTagName("header")[0].setAttribute("state", "menu");
-     
+     startTutorial();
   }
 
   function webglAvailable() {

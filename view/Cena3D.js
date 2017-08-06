@@ -156,16 +156,20 @@ var Cena3D = function(div) {
         tela.cena3D.atualizaLabels(); 
     }
 
-    this.changeConfg = function(){
-        this.posicaox = document.getElementById('ptx').value;
-        this.posicaoy = document.getElementById('pty').value;
-        this.posicaoz = document.getElementById('ptz').value;
-        this.carga = document.getElementById('cargaCena').value;
+    this.changeConfg = function(objData){
+        console.log(objData);
 
-        OBJ.position.x = parseFloat(this.posicaox); 
-        OBJ.position.y = parseFloat(this.posicaoy);
-        OBJ.position.z = parseFloat(this.posicaoz);
-        OBJ.carga = parseFloat(this.carga);
+        if(objData.px)OBJ.position.x = parseFloat(objData.px); 
+        if(objData.py)OBJ.position.y = parseFloat(objData.py); 
+        if(objData.pz)OBJ.position.z = parseFloat(objData.pz); 
+        if(objData.rx)OBJ.rotation.x = parseFloat(objData.rx); 
+        if(objData.ry)OBJ.rotation.y = parseFloat(objData.ry); 
+        if(objData.rz)OBJ.rotation.z = parseFloat(objData.rz); 
+
+        if(objData.cg)OBJ.rotation.carga = parseFloat(objData.cg); 
+
+        if(objData.ra)OBJ.rotation.carga = parseFloat(objData.ra); 
+
 	}
 
 	this.excludeObject = function(){
@@ -311,14 +315,23 @@ var Cena3D = function(div) {
         var ob = objetos.concat(pontos);
         var intersects = raycaster.intersectObjects( ob );
             if ( intersects.length > 0 ) {
+               
                 if ( INTERSECTED != intersects[ 0 ].object ) {
                     updateCamera = false;
                     cursorOver();
                     if ( INTERSECTED ) INTERSECTED.material.color.setHex( INTERSECTED.currentHex );
-                        INTERSECTED = intersects[ 0 ].object;
-                        INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
-                        plane.position.copy( INTERSECTED.position );
-                        plane.lookAt( camera.position );
+                    
+                    INTERSECTED = intersects[ 0 ].object;
+                    INTERSECTED.currentHex = INTERSECTED.material.color.getHex();
+
+                    if( plane.position != INTERSECTED.position){
+                   
+                    }
+
+                    plane.position.copy( INTERSECTED.position );
+                    plane.lookAt( camera.position );
+
+                      
                     }
                 } else {
                     updateCamera = true;
@@ -428,11 +441,18 @@ var Cena3D = function(div) {
         event.preventDefault();
         updateCamera = true;
 
+
         if ( INTERSECTED ) {
-            plane.position.copy( INTERSECTED.position );
-            removeVetor();
-            SELECTED = null;
+        /*
+        */
+            if(SELECTED){
+                console.log("revoving vector");
+                removeVetor();
+            }
+
             tela.cena3D.atualizaLabels();        
+            plane.position.copy( INTERSECTED.position );
+            SELECTED = null;
         }
     }
 
@@ -450,26 +470,43 @@ var Cena3D = function(div) {
 
         if (intersectsObjetos.length > 0) {
             OBJ = intersectsObjetos[0].object;
+            var menuparams = {
+                px: OBJ.position.x,
+                py: OBJ.position.y,
+                pz: OBJ.position.z,
+                rx: OBJ.rotation.x,
+                ry: OBJ.rotation.y,
+                rz: OBJ.rotation.z,
+                cg: OBJ.carga
+            }
             switch (OBJ.name) {
                 case "dcharge":
                     document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenu;
-                    setNumbersInMenu(document.getElementById("scene_nums"), 5);
+
+                    setNumbersInMenu(document.getElementById("popupCena"), menuparams);
                     // get and set the properties
                 break;
                 case "dot":
                     document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenu;
+                    setNumbersInMenu(document.getElementById("popupCena"), menuparams);
                     // get and set the properties
                 break;
                 case "ring":
+                    menuparams.ra = OBJ.raio;
                     document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenuCirc;
+                    setNumbersInMenu(document.getElementById("popupCena"), menuparams);
                     // get and set the properties
                 break;
                 case "line":
                     document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenuLine;
+                    menuparams.cm = OBJ.raio;
+                    setNumbersInMenu(document.getElementById("popupCena"), menuparams);
                     // get and set the properties 
                 break;
                 case "disc":
                     document.getElementById("menu_show_demo").innerHTML = varPopShowObjectMenuCirc;
+                    menuparams.ra = OBJ.raio;
+                    setNumbersInMenu(document.getElementById("popupCena"), menuparams);
                     // get and set the properties
                 break;
             }
@@ -480,8 +517,8 @@ var Cena3D = function(div) {
     }
  }
 
-function change(){        
-    tela.cena3D.changeConfg();
+function change(obj){        
+    tela.cena3D.changeConfg(obj);
     fecharPop();
 }
 
