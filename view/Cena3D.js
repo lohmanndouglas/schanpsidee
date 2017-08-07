@@ -59,7 +59,7 @@ var Cena3D = function(div) {
     );
     scene.add(plane);
 
-    scene.add( new THREE.AmbientLight(0xf0f0f0));
+    scene.add( new THREE.AmbientLight(0xffffff, 0.8));
     
     this.lista = function(){
         return helper_xOz;
@@ -381,7 +381,7 @@ var Cena3D = function(div) {
                 y = parseFloat(intersectsInfo[0].object.valor[1])
                 z = parseFloat(intersectsInfo[0].object.valor[2])
                
-                obj_info.innerHTML = "<span > Vetor For&ccedil;a El&eacute;trico :("+x.toPrecision(PRECISION)+", "+y.toPrecision(PRECISION)+", "+z.toPrecision(PRECISION)+") N </span> <br>";
+                obj_info.innerHTML = "<span > Vetor For&ccedil;a El&eacute;trica :("+x.toPrecision(PRECISION)+", "+y.toPrecision(PRECISION)+", "+z.toPrecision(PRECISION)+") N </span> <br>";
                 document.getElementById('popupCena').setAttribute("state","show");
             } else if(intersectsInfo[0].object.tipo == "W"){
 

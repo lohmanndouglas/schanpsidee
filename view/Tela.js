@@ -137,68 +137,68 @@ function imgSelect() {
         case "dcharge":
           document.getElementById("menu_demo").innerHTML = varPopObjectMenu;
           setNumbersInMenu(document.getElementById("scene_nums"), {
-            px: 10,
-            py: 20,
-            pz: 5,
-            rx: 10,
-            ry: 20,
-            rz: 5,
-            cg: 5,
+            px: 0,
+            py: 0,
+            pz: 4,
+            rx: 0,
+            ry: 0,
+            rz: 0,
+            cg: 10,
           });
           menuNumbers = document.getElementById("scene_nums");
         break;
         case "dot":
           document.getElementById("menu_demo").innerHTML = varPopObjectMenu;
           setNumbersInMenu(document.getElementById("scene_nums"),  {
-            px: 10,
-            py: 20,
-            pz: 5,
-            rx: 10,
-            ry: 20,
-            rz: 5,
-            cg: 5,
+            px: 0,
+            py: 0,
+            pz: 0,
+            rx: 0,
+            ry: 0,
+            rz: 0,
+            cg: 10,
           });
           menuNumbers = document.getElementById("scene_nums");
         break;
         case "ring":
           document.getElementById("menu_demo").innerHTML = varPopObjectMenuCirc;
           setNumbersInMenu(document.getElementById("scene_nums"),  {
-            px: 10,
-            py: 20,
-            pz: 5,
-            rx: 10,
-            ry: 20,
-            rz: 5,
-            cg: 5,
-            ra: 10,
+            px: 0,
+            py: 0,
+            pz: 0,
+            rx: 0,
+            ry: 0,
+            rz: 0,
+            cg: 10,
+            ra: 5,
           });
           menuNumbers = document.getElementById("scene_nums");
         break;
         case "line":
           document.getElementById("menu_demo").innerHTML = varPopObjectMenuLine;
           setNumbersInMenu(document.getElementById("scene_nums"),  {
-            px: 10,
-            py: 20,
-            pz: 5,
-            rx: 10,
-            ry: 20,
-            rz: 5,
-            cg: 5,
-            cm: 10,
+            px: 0,
+            py: 0,
+            pz: 0,
+            rx: 0,
+            ry: 0,
+            rz: 0,
+            cg: 10,
+            cm: 5,
           });
           menuNumbers = document.getElementById("scene_nums");
         break;
         case "disc":
           document.getElementById("menu_demo").innerHTML = varPopObjectMenuCirc;
           setNumbersInMenu(document.getElementById("scene_nums"),  {
-            px: 10,
-            py: 20,
-            pz: 5,
-            rx: 10,
-            ry: 20,
-            rz: 5,
-            cg: 5,
-            ra: 10,
+            px: 0,
+            py: 0,
+            pz: 0,
+            rx: 0,
+            ry: 0,
+            rz: 0,
+            cg: 10,
+            ra: 3,
           });
           menuNumbers = document.getElementById("scene_nums");
         break;
@@ -283,7 +283,7 @@ function calcObjetct() {
       break;
     }
 
-    setTimeout( closePopUp , 500);
+    setTimeout( closePopUp , 200);
 }
 
 var popUpDialog = null;

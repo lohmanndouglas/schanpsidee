@@ -1,7 +1,7 @@
 // define a classe Anel
 var RingView = function(raio,carga,px,py,pz,rpx,rpy,rpz) { 
-    var torusGeometry = new THREE.TorusGeometry(raio, 0.4, 20, 60, Math.PI*5 ); 
-    var torusMaterial = new THREE.MeshLambertMaterial({color: 0xff0000,wireframe: true});
+    var torusGeometry = new THREE.TorusGeometry(raio, 0.37, 40, 100, Math.PI*2 ); 
+    var torusMaterial = new THREE.MeshBasicMaterial({color: 0x01DF3A});
     var torus = new THREE.Mesh(torusGeometry, torusMaterial);
     torus.position.x = px;
     torus.position.y = py;
@@ -19,7 +19,7 @@ var RingView = function(raio,carga,px,py,pz,rpx,rpy,rpz) {
 // define a classe Ponto
 var DotView = function(raio,carga,px,py,pz) { 
     var sphereGeometry = new THREE.SphereGeometry( 0.25, 8, 8 );
-    var sphereMaterial = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+    var sphereMaterial = new THREE.MeshBasicMaterial( {color: 0x2EFEF7} );
     var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
     sphere.position.x = px;
     sphere.position.y = py;
@@ -30,8 +30,8 @@ var DotView = function(raio,carga,px,py,pz) {
 }
 
 var ChargeView = function(raio,carga,px,py,pz) { 
-    var sphereGeometry = new THREE.SphereGeometry( 0.25, 8, 8 );
-    var sphereMaterial = new THREE.MeshBasicMaterial( {color: 0x000000} );
+    var sphereGeometry = new THREE.SphereGeometry( 0.20, 8, 8 );
+    var sphereMaterial = new THREE.MeshBasicMaterial( {color: 0x424242} );
     var sphere = new THREE.Mesh( sphereGeometry, sphereMaterial );
     sphere.position.x = px;
     sphere.position.y = py;
@@ -44,7 +44,7 @@ var ChargeView = function(raio,carga,px,py,pz) {
 var DiscView = function(raio,carga,px,py,pz,rpx,rpy,rpz){
     
     var geometry = new THREE.CircleGeometry(raio, 100);
-    var material = new THREE.MeshBasicMaterial( { color: 0x00FFFF} );
+    var material = new THREE.MeshBasicMaterial( { color: 0xFF8000} );
     material.side = THREE.DoubleSide;
     var circle = new THREE.Mesh( geometry, material );
     circle.position.x = px;
@@ -64,8 +64,8 @@ var DiscView = function(raio,carga,px,py,pz,rpx,rpy,rpz){
 }
 
 var LineView = function(raio,carga,px,py,pz,rpx,rpy,rpz){
-    var geometry = new THREE.CylinderGeometry( 0.7, 0.7, raio, 32 );
-    var material = new THREE.MeshBasicMaterial( { color: 0xFF4500} );
+    var geometry = new THREE.CylinderGeometry( 0.5, 0.5, raio, 50 );
+    var material = new THREE.MeshBasicMaterial( { color: 0xB40404} );
     var disco = new THREE.Mesh( geometry, material );
     disco.position.x = px;
     disco.position.y = py;
@@ -106,12 +106,12 @@ var VetorView =  function(pInicio, pFim, tipo){
     }
     // ArrowHelper(dir, origin, length, hex, headLength, headWidth )
     if(tipo == "F"){
-        this.cor = 0x0000ff;
+        this.cor = 0xBFFF00;
         var arrowHelper = new THREE.ArrowHelper(direction.normalize(), from, length, this.cor, headWidth, headLength );
         arrowHelper.line.material.linewidth = 3;
     }
     if(tipo == "E"){
-        this.cor = 0xFFFF00;
+        this.cor = 0x2E2EFE;
         var arrowHelper = new THREE.ArrowHelper(direction.normalize(), from, length, this.cor, headWidth, headLength );
         arrowHelper.line.material.linewidth = 3;
     }
@@ -172,15 +172,15 @@ var scale = function(){
 var Info = function(pInicial, Pfim, vetorCalculado, tipo) { 
     this.deslocamentoz = 1;
     this.deslocamentoy = 1;
-    this.cor = 0xFFD700;
+    this.cor = 0x2E2EFE;
     if(tipo == "F") {
         this.deslocamentoz = 2;
-        this.cor = 0x00BFFF;
+        this.cor = 0xBFFF00;
     }
     if(tipo == "V") {
         this.deslocamentoz = 1;
         this.deslocamentoy = 2.1;
-        this.cor = 0x00FF00;
+        this.cor = 0x7401DF;
     }
     if(tipo == "W") {
         this.deslocamentoz = 2;
