@@ -1,5 +1,6 @@
 // define a classe Anel
 var RingView = function(raio,carga,px,py,pz,rpx,rpy,rpz) { 
+	console.log("Raio: "+raio);
     var torusGeometry = new THREE.TorusGeometry(raio, 0.37, 40, 100, Math.PI*2 ); 
     var torusMaterial = new THREE.MeshBasicMaterial({color: 0x01DF3A});
     var torus = new THREE.Mesh(torusGeometry, torusMaterial);

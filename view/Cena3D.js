@@ -157,7 +157,7 @@ var Cena3D = function(div) {
     }
 
     this.changeConfg = function(objData){
-        console.log(objData);
+        console.log("OBJ: "+objData);
 
         if(objData.px)OBJ.position.x = parseFloat(objData.px); 
         if(objData.py)OBJ.position.y = parseFloat(objData.py); 
@@ -166,9 +166,15 @@ var Cena3D = function(div) {
         if(objData.ry)OBJ.rotation.y = parseFloat(objData.ry); 
         if(objData.rz)OBJ.rotation.z = parseFloat(objData.rz); 
 
-        if(objData.cg)OBJ.rotation.carga = parseFloat(objData.cg); 
-
-        if(objData.ra)OBJ.rotation.carga = parseFloat(objData.ra); 
+        if(objData.cg)OBJ.carga = parseFloat(objData.cg); 
+		// if(objData.cm)OBJ.raio = parseFloat(objData.ra);
+        if(objData.ra || objData.cm ){
+        	type = OBJ.name;
+        	tela.cena3D.excludeObject();
+			insertObject(objData, type)
+        	//OBJ.raio = parseFloat(objData.ra); 
+        }
+		
 
 	}
 
@@ -517,7 +523,7 @@ var Cena3D = function(div) {
     }
  }
 
-function change(obj){        
+function change(obj){    
     tela.cena3D.changeConfg(obj);
     fecharPop();
 }

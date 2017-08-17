@@ -18,6 +18,7 @@
  * \param charge, the distribution of charge
  */
 function calc_eletric_fild(vert, dot, charge){
+	
     var Q = charge * Math.pow(10,-6);
 	var epsilon = 8.854 * Math.pow(10,-12);
 	var k = 1 / (4*Math.PI*epsilon);

@@ -112,10 +112,12 @@ function calcField() {
              * don't do the scale here (it's addvector function)
              * remove pI vector
              */
-            total.divideScalar(250);
+            pI = [total.x,total.y,total.z];
             total.add(Dot_POSITION);
+            total.divideScalar(250);
             tela.cena3D.addVetor(Dot_POSITION.toArray(), total.toArray(), "E");
-            tela.cena3D.addVetorInfo(Dot_POSITION.toArray(), pI, [total.x,total.y,total.z], "E");
+            tela.cena3D.addVetorInfo(Dot_POSITION.toArray(), [total.x,total.y,total.z], pI,  "E");
+
     	}
     }
     if(charge_dots.length < 1){
@@ -226,10 +228,13 @@ function calcForce(){
              * don't do the scale here (it's addvector function)
              * remove pI vector
              */
-            total.multiplyScalar(500);
+
+            pI = [total.x,total.y,total.z];
+            total.multiplyScalar(200);
             total.add(Dot_POSITION);
-            tela.cena3D.addVetor(Dot_POSITION.toArray(),total.toArray(), "F");
-            tela.cena3D.addVetorInfo(Dot_POSITION.toArray(), pI, [total.x,total.y,total.z], "F");
+            alert(Dot_POSITION.toArray()+" | "+total.toArray());
+            tela.cena3D.addVetor(Dot_POSITION.toArray(), total.toArray(), "F");
+            tela.cena3D.addVetorInfo(Dot_POSITION.toArray(), [total.x,total.y,total.z], pI,  "F");
         }
     }
     if(charge_dots.length < 1){

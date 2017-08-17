@@ -170,7 +170,7 @@ function imgSelect() {
             ry: 0,
             rz: 0,
             cg: 10,
-            ra: 5,
+            ra: 4,
           });
           menuNumbers = document.getElementById("scene_nums");
         break;
@@ -234,7 +234,6 @@ function setNumbersInJobMenu() {
 
 function changeSelectedObject(){
   console.log("change");
-
   change(getNumbersFromMenu( document.getElementById("popupCena") ) );
   
 }
@@ -353,23 +352,23 @@ function insertObject(nums, type) {
   console.log(nums + "   " + type);
   switch (type) {
     case "dcharge":
-      obj = new ChargeView(0.05, nums.cg, nums.px, nums.py, nums.pz);
+      obj = new ChargeView(0.05, parseInt(nums.cg), parseInt(nums.px), parseInt(nums.py), parseInt(nums.pz));
       tela.cena3D.addDot(obj);
     break;
     case "dot":
-      obj = new DotView(0.1, nums.cg, nums.px, nums.py, nums.pz);
+      obj = new DotView(0.1, parseInt(nums.cg), parseInt(nums.px), parseInt(nums.py), parseInt(nums.pz));
       tela.cena3D.addObject(obj);
     break;
     case "ring":
-      obj = new RingView(4, nums.cg, nums.px, nums.py, nums.pz, nums.rx, nums.ry, nums.rz); // change raio atribut
+      obj = new RingView(parseInt(nums.ra), parseInt(nums.cg), parseInt(nums.px), parseInt(nums.py), parseInt(nums.pz), parseInt(nums.rx), parseInt(nums.ry), parseInt(nums.rz)); // change raio atribut
       tela.cena3D.addObject(obj); 
     break;
     case "line":
-      obj = new LineView(4, nums.cg, nums.px, nums.py, nums.pz, nums.rx, nums.ry, nums.rz);
+      obj = new LineView(parseInt(nums.cm), parseInt(nums.cg), parseInt(nums.px), parseInt(nums.py), parseInt(nums.pz), parseInt(nums.rx), parseInt(nums.ry), parseInt(nums.rz));
       tela.cena3D.addObject(obj); 
     break;
     case "disc":
-      obj = new DiscView(4, nums.cg, nums.px, nums.py, nums.pz, nums.rx, nums.ry, nums.rz);
+      obj = new DiscView(parseInt(nums.ra), parseInt(nums.cg), parseInt(nums.px), parseInt(nums.py), parseInt(nums.pz), parseInt(nums.rx), parseInt(nums.ry), parseInt(nums.rz));
       tela.cena3D.addObject(obj); 
     break;
   }
@@ -392,13 +391,8 @@ function _close_set_configuration() {
   closePopUp();
   return;
 
-  /*
-  TODO já está correto? podemos remover as linhas abaixo?
-
-  */
-
-  document.getElementById("popupConfiguration").style.display = "none";
-  document.getElementById("divTrans").style.display = "none";
+//  document.getElementById("popupConfiguration").style.display = "none";
+//  document.getElementById("divTrans").style.display = "none";
 }
 
 function _save_new_configuration() {
