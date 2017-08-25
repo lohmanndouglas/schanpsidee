@@ -394,7 +394,7 @@ var Cena3D = function(div) {
                 v = parseFloat(intersectsInfo[0].object.valor.toFixed(4));
                 //document.getElementById('popupCena').setAttribute("state","show");
 
-                obj_info.innerHTML = "<span> Trabalho :<br>"+v.toPrecision(PRECISION)+" x10&#8315;&#8310; J </span> <br>";
+                obj_info.innerHTML = "<span> Trabalho :<br>"+v.toPrecision(PRECISION)+" &micro; J </span> <br>";
                 document.getElementById('popupCena').setAttribute("state","show");
             }else if(intersectsInfo[0].object.tipo == "V"){
                 v = parseFloat(intersectsInfo[0].object.valor.toFixed(4));

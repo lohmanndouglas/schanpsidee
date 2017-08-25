@@ -64,7 +64,7 @@ function calcField() {
                     break;
                     case "line":
                         var length_ = objects[j].raio;
-                        var n_iterations = 1000;
+                        var n_iterations = 2000;
                         var cont = length_/n_iterations;
                         var dp = cont/2; 
                         for(var k = 0; k < n_iterations ; k++){
@@ -113,9 +113,11 @@ function calcField() {
              * remove pI vector
              */
             pI = [total.x,total.y,total.z];
-            total.add(Dot_POSITION);
-            total.divideScalar(150);
-            tela.cena3D.addVetor(Dot_POSITION.toArray(), total.toArray(), "E");
+//            total.add(Dot_POSITION);
+//            total.divideScalar(150);
+            alert(total.toArray());
+            // tela.cena3D.addVetor(Dot_POSITION.toArray(), total.toArray(), "E");
+            tela.cena3D.addVetor2(Dot_POSITION, total, "E");
             tela.cena3D.addVetorInfo(Dot_POSITION.toArray(), [total.x,total.y,total.z], pI,  "E");
 
     	}
@@ -186,7 +188,7 @@ function calcForce(){
                     break;
                     case "line":
                         var length_ = objects[j].raio;
-                        var n_iterations = 1000;
+                        var n_iterations = 2000;
                         var cont = length_/n_iterations;
                         var dp = cont/2; 
                         for(var k = 0; k < n_iterations ; k++){
@@ -304,7 +306,7 @@ function calcPot(){
                     break;
                     case "line":
                         var length_ = objects[j].raio;
-                        var n_iterations = 1000;
+                        var n_iterations = 2000;
                         var cont = length_/n_iterations;
                         var dp = cont/2; 
                         for(var k = 0; k < n_iterations ; k++){
@@ -372,7 +374,7 @@ function calcPot(){
  * TODO: pass the position and not the
  *       positions on the list
  */
-function calcJob(i_initial, i_final){
+function calcWork(i_initial, i_final){
     /* get dots and objects */
     var w = 0;
     var list_dots = tela.cena3D.listPontosView();
@@ -421,7 +423,7 @@ function calcJob(i_initial, i_final){
                     break;
                     case "line":
                         var length_ = objects[j].raio;
-                        var n_iterations = 1000;
+                        var n_iterations = 2000;
                         var cont = length_/n_iterations;
                         var dp = cont/2; 
                         for(var k = 0; k < n_iterations ; k++){
@@ -464,7 +466,7 @@ function calcJob(i_initial, i_final){
          * don't do the scale here (it's addvector function)
          * remove pI vector
          */
-        w = charge_dots[0].carga*(total[1] - total[0]);
+        w = charge_dots[0].carga*(total[0] - total[1]);
         tela.cena3D.addVetor(charge_dots[0].position.toArray(), charge_dots[1].position.toArray(), "W");
     } else {
         w = 0;

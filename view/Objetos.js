@@ -139,6 +139,68 @@ var VetorView =  function(pInicio, pFim, tipo){
 
 }
 
+
+var VetorView2 =  function(from, to, tipo){
+    
+    // var from = new THREE.Vector3( 4, 4, 4 );
+    // var to = new THREE.Vector3( 0, 0, 0 );
+    this.cor = 0xff0000;
+
+   // var from = new THREE.Vector3( pInicio[0], pInicio[1], pInicio[2] );
+  //  var to = new THREE.Vector3( pFim[0], pFim[1], pFim[2] );
+
+    var direction = to.clone().sub(from);
+    var length = direction.length();
+    var headLength = length/6;
+    var headWidth = length/3;
+    if (headLength < 0.65){
+        headLength = 0.65;
+    }
+    if (headLength > 1){
+        headLength = 1;
+    }
+    if (headWidth < 0.65){
+        headWidth = 0.65;
+    }
+    if (headWidth > 2){
+        headWidth = 2;
+    }
+    // ArrowHelper(dir, origin, length, hex, headLength, headWidth )
+    if(tipo == "F"){
+        this.cor = 0xBFFF00;
+        var arrowHelper = new THREE.ArrowHelper(direction.normalize(), from, length, this.cor, headWidth, headLength );
+        arrowHelper.line.material.linewidth = 3;
+    }
+    if(tipo == "E"){
+        this.cor = 0x2E2EFE;
+        var arrowHelper = new THREE.ArrowHelper(direction.normalize(), from, length, this.cor, headWidth, headLength );
+        arrowHelper.line.material.linewidth = 3;
+    }
+
+    if(tipo == "W"){
+
+        var material = new THREE.LineDashedMaterial({
+            color: 0xffaa00, 
+            dashSize: 3,
+            gapSize: 1,
+            linewidth: 2        
+        });
+
+        var geometry = new THREE.Geometry();
+        geometry.vertices.push(
+            new THREE.Vector3( pInicio[0], pInicio[1], pInicio[2] ),
+            new THREE.Vector3( pFim[0], pFim[1], pFim[2] )
+        );
+
+        var arrowHelper = new THREE.Line( geometry, material);
+    }
+
+    return arrowHelper;
+
+}
+
+
+
 var scale = function(){
 
 	    this.cor = 0xff0000;
