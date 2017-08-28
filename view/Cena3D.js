@@ -73,7 +73,7 @@ var Cena3D = function(div) {
     }
 
     var grid = new THREE.GridHelper(100, 10 , '0xffffff' , '0xffffff' );
-    scene.add(grid);
+    //scene.add(grid);
 
     renderScene(); /* render scene */
 
@@ -193,9 +193,11 @@ var Cena3D = function(div) {
 
     this.addVetor = function(pInicial, Pfim, tipo){
         // alert("ini: "+pInicial+"fim: "+Pfim+"tipo: "+tipo);
-        obj = new VetorView(pInicial, Pfim, tipo);
-        scene.add(obj);
-        vetores.push(obj);
+        obj = new VetorView2(pInicial, Pfim, tipo);
+        if (obj != -1){
+            scene.add(obj);
+            vetores.push(obj);
+        }
     }
 
     this.addVetorInfo = function(pInicial, Pfim, vetorCalculado, tipo){

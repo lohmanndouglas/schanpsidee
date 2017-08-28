@@ -115,9 +115,9 @@ function calcField() {
             pI = [total.x,total.y,total.z];
 //            total.add(Dot_POSITION);
 //            total.divideScalar(150);
-            alert(total.toArray());
+            //alert(total.toArray());
             // tela.cena3D.addVetor(Dot_POSITION.toArray(), total.toArray(), "E");
-            tela.cena3D.addVetor2(Dot_POSITION, total, "E");
+            tela.cena3D.addVetor(Dot_POSITION, total, "E");
             tela.cena3D.addVetorInfo(Dot_POSITION.toArray(), [total.x,total.y,total.z], pI,  "E");
 
     	}
@@ -235,10 +235,11 @@ function calcForce(){
              */
 
             pI = [total.x,total.y,total.z];
-            total.multiplyScalar(150);
-            total.add(Dot_POSITION);
+  //          total.multiplyScalar(150);
+   //         total.add(Dot_POSITION);
             //alert(Dot_POSITION.toArray()+" | "+total.toArray());
-            tela.cena3D.addVetor(Dot_POSITION.toArray(), total.toArray(), "F");
+
+            tela.cena3D.addVetor(Dot_POSITION, total, "F");
             tela.cena3D.addVetorInfo(Dot_POSITION.toArray(), [total.x,total.y,total.z], pI,  "F");
         }
     }
