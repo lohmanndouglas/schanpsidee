@@ -8,186 +8,469 @@
  *
  */
 
-
-/*!
+ /*!
  * This method tranlate function calls 
  * to calculate the electric field. 
  *  
- * \param object, any webGL object
- * \param dot, any dot in scene
+ * \param void
+ *
  */
 function calcField() {
-    this.pI = [0,0,0];
-    this.a = tela.cena3D.listPontosView();
-    this.o = tela.cena3D.listObjView();
-    //this.oModel = controlador.objeto.listObj();
-    if(this.a.length >= 1 && this.o.length >= 1 ){
-        // percorer vetor de pontos 
-        for (this.i = 0; this.i < this.a.length; this.i++) {
-            this.p_click = [this.a[this.i].position.x, this.a[this.i].position.y, this.a[this.i].position.z]
-            this.vetor = [0,0,0];
-            this.aux = [0,0,0];
-            // percorer o vetor de objetos
-            for(this.j = 0; this.j < this.o.length; this.j++){
-                this.p_obj = [this.o[this.j].position.x, this.o[this.j].position.y, this.o[this.j].position.z];
-                // verificar se objeto tem mudar 
-                this.raio = this.o[this.j].raio;
-                // soma todos os vetores de campo eletrico gerados pelos objetos
-                this.carga = this.o[this.j].carga;
-                if(this.o[this.j].geometry.type == "TorusGeometry"){
-                    this.aux = calcCampoAnel(this.p_click, this.p_obj, this.raio, this.carga);
+	
+	/* get dots and objects */
+	var charge_dots = tela.cena3D.listPontosView(); // a
+	var objects = tela.cena3D.listObjView(); // o
+
+    if(charge_dots.length >= 1 && objects.length >= 1 ){
+        var Dot_POSITION = new THREE.Vector3();
+        var total = new THREE.Vector3(0,0,0);
+        var resultant_vector; 
+        var pI = [0,0,0];
+    	for (var i = 0; i < charge_dots.length; i++) { // for each dot
+    		Dot_POSITION = charge_dots[i].position;
+            total.set(0,0,0);
+    		for(var j = 0; j < objects.length; j++){ // for each object
+                
+                /* TODO: get the object mesh 
+                 * This is not working because the precision of the mesh vertices 
+                 * The next TODO comments there were to change this.
+                 */
+                var vertices = []; 
+                //var vertices = objects[j].geometry.vertices;
+                //var x =  vertices.length;
+                // var radius = objects[j].raio;
+                var charge = objects[j].carga;
+                var new_vertices = []; 
+                var matriz_t = objects[j].matrix.clone();
+                
+                /* TODO: get the object mesh
+                 * Change to the all switch for commented "for"
+                 * for each type of object :/
+                 */
+                 switch (objects[j].name) {
+                    case "ring":
+                        var radius = objects[j].raio;
+                        var n_iterations = 1000;
+                        var teta = 0;
+                        var dTeta = 2*Math.PI/n_iterations; 
+                        for(var k = 0; k < n_iterations ; k++){
+                            vertices[k] = new THREE.Vector3(radius*Math.cos(teta), radius*Math.sin(teta),0);
+                            new_vertices[k]=vertices[k].applyProjection(matriz_t);
+                            teta = teta + dTeta;
+                        }        
+                    break;
+                    case "dot":
+                        new_vertices[0] = objects[j].position;
+                    break;
+                    case "line":
+                        var length_ = objects[j].raio;
+                        var n_iterations = 2000;
+                        var cont = length_/n_iterations;
+                        var dp = cont/2; 
+                        for(var k = 0; k < n_iterations ; k++){
+                            vertices[k] = new THREE.Vector3(0, (-length_/2) + dp,0);
+                            new_vertices[k]=vertices[k].applyProjection(matriz_t);
+                            dp = dp + cont;
+                        }     
+                    break;
+                    case "disc":
+                        var radius = objects[j].raio;
+                        var n_iterations = 2;
+                        var n_iradius = 1000;
+                        var dR = radius/n_iradius;
+                        var R = dR/2;
+                        var inte = 0;
+                        for(var l = 0; l < n_iradius ; l++){
+                            var teta = 0;
+                            var dTeta = 2*Math.PI/n_iterations;
+                            for(var k = 0; k < n_iterations ; k++){
+                                // alert("teta : "+teta+"R : "+R);
+                                vertices[inte] = new THREE.Vector3(R*Math.cos(teta), R*Math.sin(teta),0);
+                                //alert("x: "+vertices[inte].x+" y: "+vertices[inte].y+" z: "+vertices[inte].z);
+                                new_vertices[inte]=vertices[inte].applyProjection(matriz_t);
+                                teta = teta + dTeta;
+                                inte++;
+                            }
+                            n_iterations = n_iterations+4;
+                            R = R + dR;
+                        }  
+                    break;
                 }
-                if(this.o[this.j].geometry.type == "CircleGeometry"){
-                    this.aux = calcCampoDisco(this.p_click, this.p_obj, this.raio, this.carga);
-                }
-                if(this.o[this.j].geometry.type == "CylinderGeometry"){
-                    this.aux = calcCampoLinha(this.p_click, this.p_obj, this.raio, this.carga);
-                }
-                this.aux[0] = parseFloat(this.aux[0]);
-                this.aux[1] = parseFloat(this.aux[1]);
-                this.aux[2] = parseFloat(this.aux[2]);               
-                this.vetor[0] = this.vetor[0] + this.aux[0];
-                this.vetor[1] = this.vetor[1] + this.aux[1];
-                this.vetor[2] = this.vetor[2] + this.aux[2];
+                // var k=0;
+                // for(k = 0; k < n_iterations ; k++){
+                //     new_vertices[k]=vertices[k].applyProjection(matriz_t);
+                // }
+                // alert("n pontos: "+vertices.length);
+                // alert("x: "+vertices[0].x+" y: "+vertices[0].y+" z: "+vertices[0].z);
+                // alert("x: "+vertices[1].x+" y: "+vertices[1].y+" z: "+vertices[1].z);
+                // alert("x: "+vertices[2].x+" y: "+vertices[2].y+" z: "+vertices[2].z);
+                // alert("x: "+vertices[3].x+" y: "+vertices[3].y+" z: "+vertices[3].z);
+                resultant_vector = calc_eletric_fild(new_vertices, Dot_POSITION, charge);
+                total.add(resultant_vector);
             }
-            this.pI[0] = this.p_click[0] + (this.vetor[0]/250);
-            this.pI[1] = this.p_click[1] + (this.vetor[1]/250);
-            this.pI[2] = this.p_click[2] + (this.vetor[2]/250);
-            tela.cena3D.addVetor(this.p_click, this.pI, "E");
-            tela.cena3D.addVetorInfo(this.p_click, this.pI, this.vetor, "E");
-            console.log("Vetor : "+this.pI);
-            console.log("Campo eletrico: "+this.vetor);
-        }
+            /* TODO: change addVector and addVectorInfo to acept vector3.
+             * don't do the scale here (it's addvector function)
+             * remove pI vector
+             */
+            pI = [total.x,total.y,total.z];
+//            total.add(Dot_POSITION);
+//            total.divideScalar(150);
+            //alert(total.toArray());
+            // tela.cena3D.addVetor(Dot_POSITION.toArray(), total.toArray(), "E");
+            tela.cena3D.addVetor(Dot_POSITION, total, "E");
+            tela.cena3D.addVetorInfo(Dot_POSITION.toArray(), [total.x,total.y,total.z], pI,  "E");
+
+    	}
     }
-    if(this.a.length < 1){
+    if(charge_dots.length < 1){
         alert("Inserir Ponto");
     }
-    if(this.o.length < 1){
+    if(objects.length < 1){
         alert("Inserir Objetos geometricos");
     }
 }
 
 
+/*!
+ * This method tranlate function calls 
+ * to calculate the force generated 
+ * by an eletric field to a set of dots. 
+ *  
+ * \param void
+ *
+ */
 function calcForce(){
-        this.pI = [0,0,0];
-        // console.log("calculando campo eletrico");
-        // (geometry.type)
-        this.a = tela.cena3D.listPontosView();
-        // this.aModel = controlador.objeto.listPontos();
-        this.o = tela.cena3D.listObjView();
-        // this.oModel = controlador.objeto.listObj();
-        if(this.a.length >= 1 && this.o.length >= 1 ){
-            // percorer vetor de pontos 
-            for (this.i = 0; this.i < this.a.length; this.i++) {
-                this.p_click = [this.a[this.i].position.x, this.a[this.i].position.y, this.a[this.i].position.z]
-                this.vetor = [0,0,0];
-                this.aux = [0,0,0];
-                // percorer o vetor de objetos
-                for(this.j = 0; this.j < this.o.length; this.j++){
-                    this.p_obj = [this.o[this.j].position.x, this.o[this.j].position.y, this.o[this.j].position.z];
-                    // verificar se objeto tem mudar 
-                    this.raio = this.o[this.j].raio;
-                    // soma todos os vetores de campo eletrico gerados pelos objetos
-                    this.carga = this.o[this.j].carga;
-                    if(this.o[this.j].geometry.type == "TorusGeometry"){
-                        this.aux = calcCampoAnel(this.p_click, this.p_obj, this.raio, this.carga);
-                        this.aux[0] = this.aux[0] * (this.a[this.i].carga*Math.pow(10,-6));
-                        this.aux[1] = this.aux[1] * (this.a[this.i].carga*Math.pow(10,-6));
-                        this.aux[2] = this.aux[2] * (this.a[this.i].carga*Math.pow(10,-6));
-                    }
-                    if(this.o[this.j].geometry.type == "CircleGeometry"){
-                        this.aux = calcCampoDisco(this.p_click, this.p_obj, this.raio, this.carga);
-                        this.aux[0] = this.aux[0] * this.a[this.i].carga*Math.pow(10,-6);
-                        this.aux[1] = this.aux[1] * this.a[this.i].carga*Math.pow(10,-6);
-                        this.aux[2] = this.aux[2] * this.a[this.i].carga*Math.pow(10,-6);
-                    }
-                    if(this.o[this.j].geometry.type == "CylinderGeometry"){
-                        this.aux = calcCampoLinha(this.p_click, this.p_obj, this.raio, this.carga);
-                        this.aux[0] = this.aux[0] * this.a[this.i].carga*Math.pow(10,-6);
-                        this.aux[1] = this.aux[1] * this.a[this.i].carga*Math.pow(10,-6);
-                        this.aux[2] = this.aux[2] * this.a[this.i].carga*Math.pow(10,-6);
-                    }
-                    this.aux[0] = parseFloat(this.aux[0]);
-                    this.aux[1] = parseFloat(this.aux[1]);
-                    this.aux[2] = parseFloat(this.aux[2]);               
-                    this.vetor[0] = this.vetor[0] + this.aux[0];
-                    this.vetor[1] = this.vetor[1] + this.aux[1];
-                    this.vetor[2] = this.vetor[2] + this.aux[2];    
-                } 
-                this.pI[0] = this.p_click[0] + this.vetor[0]*500;
-                this.pI[1] = this.p_click[1] + this.vetor[1]*500;
-                this.pI[2] = this.p_click[2] + this.vetor[2]*500;
-                tela.cena3D.addVetor(this.p_click, this.pI, "F");
-                tela.cena3D.addVetorInfo(this.p_click, this.pI, this.vetor, "F"); 
-                //console.log("Vetor Campo eletrico: "+this.vetor);
-            }
-        }
-        if(this.a.length < 1){
-            alert("Inserir Ponto");
-        }
-        if(this.o.length < 1){
-            alert("Inserir Objetos geometricos");
-        }    
-    }
 
+    /* get dots and objects */
+    var charge_dots = tela.cena3D.listPontosView(); // a
+    var objects = tela.cena3D.listObjView(); // o
 
-function calcPot(){
-    this.pI = [0,0,0];
-    this.a = tela.cena3D.listPontosView();
-    this.o = tela.cena3D.listObjView();
-    // this.oModel = controlador.objeto.listObj();
-    if(this.a.length >= 1 && this.o.length >= 1 ){
-        // percorer vetor de pontos 
-        for (this.i = 0; this.i < this.a.length; this.i++) {
-            this.p_click = [this.a[this.i].position.x, this.a[this.i].position.y, this.a[this.i].position.z]
-            this.vetor = 0;
-            this.aux = 0;
-            // percorer o vetor de objetos
-            for(this.j = 0; this.j < this.o.length; this.j++){
-                this.p_obj = [this.o[this.j].position.x, this.o[this.j].position.y, this.o[this.j].position.z];
-                // verificar se objeto tem mudar 
-                this.raio = this.o[this.j].raio;
-                this.carga = this.o[this.j].carga;
-                if(this.o[this.j].geometry.type == "TorusGeometry"){
-                    this.aux = calcPotencialAnel(this.p_click, this.p_obj, this.raio, this.carga);
+    if(charge_dots.length >= 1 && objects.length >= 1 ){
+        var Dot_POSITION = new THREE.Vector3();
+        var total = new THREE.Vector3(0,0,0);
+        var resultant_vector; 
+        var pI = [0,0,0];
+        for (var i = 0; i < charge_dots.length; i++) { // for each dot
+            Dot_POSITION = charge_dots[i].position;
+            total.set(0,0,0);
+            for(var j = 0; j < objects.length; j++){ // for each object
+                
+                /* TODO: get the object mesh 
+                 * This is not working because the precision of the mesh vertices 
+                 * The next TODO comments there were to change this.
+                 */
+                var vertices = []; 
+                //var vertices = objects[j].geometry.vertices;
+                //var x =  vertices.length;
+                // var radius = objects[j].raio;
+                var charge = objects[j].carga;
+                var new_vertices = []; 
+                var matriz_t = objects[j].matrix.clone();
+                
+                /* TODO: get the object mesh
+                 * Change to the all switch for commented "for"
+                 * for each type of object :/
+                 */
+                 switch (objects[j].name) {
+                    case "ring":
+                        var radius = objects[j].raio;
+                        var n_iterations = 1000;
+                        var teta = 0;
+                        var dTeta = 2*Math.PI/n_iterations; 
+                        for(var k = 0; k < n_iterations ; k++){
+                            vertices[k] = new THREE.Vector3(radius*Math.cos(teta), radius*Math.sin(teta),0);
+                            new_vertices[k]=vertices[k].applyProjection(matriz_t);
+                            teta = teta + dTeta;
+                        }        
+                    break;
+                    case "dot":
+                        new_vertices[0] = objects[j].position;
+                    break;
+                    case "line":
+                        var length_ = objects[j].raio;
+                        var n_iterations = 2000;
+                        var cont = length_/n_iterations;
+                        var dp = cont/2; 
+                        for(var k = 0; k < n_iterations ; k++){
+                            vertices[k] = new THREE.Vector3(0, (-length_/2) + dp,0);
+                            new_vertices[k]=vertices[k].applyProjection(matriz_t);
+                            dp = dp + cont;
+                        }     
+                    break;
+                    case "disc":
+                        var radius = objects[j].raio;
+                        var n_iterations = 2;
+                        var n_iradius = 1000;
+                        var dR = radius/n_iradius;
+                        var R = dR/2;
+                        var inte = 0;
+                        for(var l = 0; l < n_iradius ; l++){
+                            var teta = 0;
+                            var dTeta = 2*Math.PI/n_iterations;
+                            for(var k = 0; k < n_iterations ; k++){
+                                // alert("teta : "+teta+"R : "+R);
+                                vertices[inte] = new THREE.Vector3(R*Math.cos(teta), R*Math.sin(teta),0);
+                                //alert("x: "+vertices[inte].x+" y: "+vertices[inte].y+" z: "+vertices[inte].z);
+                                new_vertices[inte]=vertices[inte].applyProjection(matriz_t);
+                                teta = teta + dTeta;
+                                inte++;
+                            }
+                            n_iterations = n_iterations+4;
+                            R = R + dR;
+                        }
+                    break;
                 }
-                if(this.o[this.j].geometry.type == "CircleGeometry"){
-                    this.aux = calcPotencialDisco(this.p_click, this.p_obj, this.raio, this.carga);
-                }
-                if(this.o[this.j].geometry.type == "CylinderGeometry"){
-                    this.aux = calcPotencialLinha(this.p_click, this.p_obj, this.raio, this.carga);
-                }
-                this.vetor = this.vetor + parseFloat(this.aux)
+                // var k=0;
+                // for(k = 0; k < n_iterations ; k++){
+                //     new_vertices[k]=vertices[k].applyProjection(matriz_t);
+                // }
+                
+                resultant_vector = calc_eletric_fild(new_vertices, Dot_POSITION, charge);
+                resultant_vector.multiplyScalar(charge_dots[i].carga*Math.pow(10,-6));
+                total.add(resultant_vector);
             }
-            console.log("Potencial eletrico Ponto"+this.j+" : "+this.vetor);
-            tela.cena3D.addVetorInfo(this.p_click, 0, this.vetor, "V");
+            /* TODO: change addVector and addVectorInfo to acept vector3.
+             * don't do the scale here (it's addvector function)
+             * remove pI vector
+             */
+
+            pI = [total.x,total.y,total.z];
+  //          total.multiplyScalar(150);
+   //         total.add(Dot_POSITION);
+            //alert(Dot_POSITION.toArray()+" | "+total.toArray());
+
+            tela.cena3D.addVetor(Dot_POSITION, total, "F");
+            tela.cena3D.addVetorInfo(Dot_POSITION.toArray(), [total.x,total.y,total.z], pI,  "F");
         }
     }
-    if(this.a.length < 1){
+    if(charge_dots.length < 1){
         alert("Inserir Ponto");
     }
-    if(this.o.length < 1){
+    if(objects.length < 1){
         alert("Inserir Objetos geometricos");
     }
 }
 
-function calcJob(i_inicial, i_final){
-        this.trab = 0;
-        this.a = tela.cena3D.listPontosView();
-        // this.aModel = controlador.objeto.listPontos();
-        this.o = tela.cena3D.listObjView();
-        // this.oModel = controlador.objeto.listObj();       
-        this.p_inicial = [this.a[i_inicial].position.x, this.a[i_inicial].position.y, this.a[i_inicial].position.z];
-        this.p_final = [this.a[i_final].position.x, this.a[i_final].position.y, this.a[i_final].position.z];
+/*!
+ * This method tranlate function calls 
+ * to calculate the potencial generated 
+ * by an eletric field to a set of dots. 
+ *  
+ * \param void
+ *
+ */
+function calcPot(){
 
-       if(this.p_inicial[0] == this.p_final[0] && this.p_inicial[1] == this.p_final[1] && this.p_inicial[2] == this.p_final[2]){
-            this.trab = 0;
-        } else {
-            this.carga = this.a[i_inicial].carga;
+    /* get dots and objects */
+    var charge_dots = tela.cena3D.listPontosView(); // a
+    var objects = tela.cena3D.listObjView(); // o
 
-            this.trab = calcTrabalho(this.p_inicial, this.p_final, this.o, this.o, this.carga);
-            tela.cena3D.addVetor(this.p_inicial, this.p_final, "W");
+    if(charge_dots.length >= 1 && objects.length >= 1 ){
+        var Dot_POSITION = new THREE.Vector3();
+        var total = 0; 
+        var pI = [0,0,0];
+        for (var i = 0; i < charge_dots.length; i++) { // for each dot
+            Dot_POSITION = charge_dots[i].position;
+            total = 0;
+            for(var j = 0; j < objects.length; j++){ // for each object
+                
+                /* TODO: get the object mesh 
+                 * This is not working because the precision of the mesh vertices 
+                 * The next TODO comments there were to change this.
+                 */
+                var vertices = []; 
+                //var vertices = objects[j].geometry.vertices;
+                //var x =  vertices.length;
+                // var radius = objects[j].raio;
+                var charge = objects[j].carga;
+                var new_vertices = []; 
+                var matriz_t = objects[j].matrix.clone();
+                
+                /* TODO: get the object mesh
+                 * Change to the all switch for commented "for"
+                 * for each type of object :/
+                 */
+                 switch (objects[j].name) {
+                    case "ring":
+                        var radius = objects[j].raio;
+                        var n_iterations = 1000;
+                        var teta = 0;
+                        var dTeta = 2*Math.PI/n_iterations; 
+                        for(var k = 0; k < n_iterations ; k++){
+                            vertices[k] = new THREE.Vector3(radius*Math.cos(teta), radius*Math.sin(teta),0);
+                            new_vertices[k]=vertices[k].applyProjection(matriz_t);
+                            teta = teta + dTeta;
+                        }        
+                    break;
+                    case "dot":
+                        new_vertices[0] = objects[j].position;
+                    break;
+                    case "line":
+                        var length_ = objects[j].raio;
+                        var n_iterations = 2000;
+                        var cont = length_/n_iterations;
+                        var dp = cont/2; 
+                        for(var k = 0; k < n_iterations ; k++){
+                            vertices[k] = new THREE.Vector3(0, (-length_/2) + dp,0);
+                            new_vertices[k]=vertices[k].applyProjection(matriz_t);
+                            dp = dp + cont;
+                        }     
+                    break;
+                    case "disc":
+                        var radius = objects[j].raio;
+                        var n_iterations = 2;
+                        var n_iradius = 1000;
+                        var dR = radius/n_iradius;
+                        var R = dR/2;
+                        var inte = 0;
+                        for(var l = 0; l < n_iradius ; l++){
+                            var teta = 0;
+                            var dTeta = 2*Math.PI/n_iterations;
+                            for(var k = 0; k < n_iterations ; k++){
+                                // alert("teta : "+teta+"R : "+R);
+                                vertices[inte] = new THREE.Vector3(R*Math.cos(teta), R*Math.sin(teta),0);
+                                //alert("x: "+vertices[inte].x+" y: "+vertices[inte].y+" z: "+vertices[inte].z);
+                                new_vertices[inte]=vertices[inte].applyProjection(matriz_t);
+                                teta = teta + dTeta;
+                                inte++;
+                            }
+                            n_iterations = n_iterations+4;
+                            R = R + dR;
+                        }
+                    break;
+                }
+                // var k=0;
+                // for(k = 0; k < n_iterations ; k++){
+                //     new_vertices[k]=vertices[k].applyProjection(matriz_t);
+                // }
+                
+                total = total + calc_potential(new_vertices, Dot_POSITION, charge);
+            }
+            /* TODO: change addVector and addVectorInfo to acept vector3.
+             * don't do the scale here (it's addvector function)
+             * remove pI vector
+             */
+            tela.cena3D.addVetorInfo(Dot_POSITION.toArray(), 0, total, "V");
         }
-        console.log("Trabalho: "+this.trab);
-        tela.cena3D.addVetorInfo(this.p_final, this.p_inicial, this.trab, "W");
     }
+    if(charge_dots.length < 1){
+        alert("Inserir Ponto");
+    }
+    if(objects.length < 1){
+        alert("Inserir Objetos geometricos");
+    }
+};
+
+
+/*! 
+ * This method tranlate function calls 
+ * to calculate the necessary work 
+ * to move from initial dot to final dot. 
+ *  
+ * \param i_initial, possitions of initial dot
+ *                   on list of dots
+ * \param i_final, possitions of final dot
+ *                   on list of dots
+ *
+ * TODO: pass the position and not the
+ *       positions on the list
+ */
+function calcWork(i_initial, i_final){
+    /* get dots and objects */
+    var w = 0;
+    var list_dots = tela.cena3D.listPontosView();
+    var charge_dots = [];
+    charge_dots[0] = list_dots[i_initial]; // initial dot
+    charge_dots[1] = list_dots[i_final]; // final dot
+    var objects = tela.cena3D.listObjView(); 
+    if(!charge_dots[0].position.equals(charge_dots[1].position)){
+        var Dot_POSITION = new THREE.Vector3(); 
+        var pI = [0,0,0];
+        var total = [0,0];
+        for (var i = 0; i < charge_dots.length; i++) { // for each dot
+            Dot_POSITION = charge_dots[i].position;
+            for(var j = 0; j < objects.length; j++){ // for each object
+                
+                /* TODO: get the object mesh 
+                 * This is not working because the precision of the mesh vertices 
+                 * The next TODO comments there were to change this.
+                 */
+                var vertices = []; 
+                //var vertices = objects[j].geometry.vertices;
+                //var x =  vertices.length;
+                // var radius = objects[j].raio;
+                var charge = objects[j].carga;
+                var new_vertices = []; 
+                var matriz_t = objects[j].matrix.clone();
+                
+                /* TODO: get the object mesh
+                 * Change to the all switch for commented "for"
+                 * for each type of object :/
+                 */
+                 switch (objects[j].name) {
+                    case "ring":
+                        var radius = objects[j].raio;
+                        var n_iterations = 1000;
+                        var teta = 0;
+                        var dTeta = 2*Math.PI/n_iterations; 
+                        for(var k = 0; k < n_iterations ; k++){
+                            vertices[k] = new THREE.Vector3(radius*Math.cos(teta), radius*Math.sin(teta),0);
+                            new_vertices[k]=vertices[k].applyProjection(matriz_t);
+                            teta = teta + dTeta;
+                        }        
+                    break;
+                    case "dot":
+                        new_vertices[0] = objects[j].position;
+                    break;
+                    case "line":
+                        var length_ = objects[j].raio;
+                        var n_iterations = 2000;
+                        var cont = length_/n_iterations;
+                        var dp = cont/2; 
+                        for(var k = 0; k < n_iterations ; k++){
+                            vertices[k] = new THREE.Vector3(0, (-length_/2) + dp,0);
+                            new_vertices[k]=vertices[k].applyProjection(matriz_t);
+                            dp = dp + cont;
+                        }     
+                    break;
+                    case "disc":
+                        var radius = objects[j].raio;
+                        var n_iterations = 2;
+                        var n_iradius = 1000;
+                        var dR = radius/n_iradius;
+                        var R = dR/2;
+                        var inte = 0;
+                        for(var l = 0; l < n_iradius ; l++){
+                            var teta = 0;
+                            var dTeta = 2*Math.PI/n_iterations;
+                            for(var k = 0; k < n_iterations ; k++){
+                                // alert("teta : "+teta+"R : "+R);
+                                vertices[inte] = new THREE.Vector3(R*Math.cos(teta), R*Math.sin(teta),0);
+                                //alert("x: "+vertices[inte].x+" y: "+vertices[inte].y+" z: "+vertices[inte].z);
+                                new_vertices[inte]=vertices[inte].applyProjection(matriz_t);
+                                teta = teta + dTeta;
+                                inte++;
+                            }
+                            n_iterations = n_iterations+4;
+                            R = R + dR;
+                        } 
+                    break;
+                }
+                // var k=0;
+                // for(k = 0; k < n_iterations ; k++){
+                //     new_vertices[k]=vertices[k].applyProjection(matriz_t);
+                // }
+                total[i] = total[i] + calc_potential(new_vertices, Dot_POSITION, charge);   
+            } // end of for
+        }
+        /* TODO: change addVector and addVectorInfo to acept vector3.
+         * don't do the scale here (it's addvector function)
+         * remove pI vector
+         */
+        w = charge_dots[0].carga*(total[0] - total[1]);
+        tela.cena3D.addVetor(charge_dots[0].position.toArray(), charge_dots[1].position.toArray(), "W");
+    } else {
+        w = 0;
+    }
+    tela.cena3D.addVetorInfo(charge_dots[1].position.toArray(), charge_dots[0].position.toArray(), w, "W");
+};
