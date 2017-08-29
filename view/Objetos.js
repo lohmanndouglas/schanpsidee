@@ -82,13 +82,12 @@ var LineView = function(raio,carga,px,py,pz,rpx,rpy,rpz){
 
 var VetorView =  function(from, to, tipo){
     
-
     this.cor = 0xff0000;
-    var vector_length = to.length();
-    var length = Math.sqrt(to.x * to.x + to.y * to.y + to.z * to.z);
-    length = Math.abs(length);
 
     if(tipo == "F"){
+        var vector_length = to.length();
+        var length = Math.sqrt(to.x * to.x + to.y * to.y + to.z * to.z);
+        length = Math.abs(length);
         this.cor = 0xBFFF00;
         // alert("log: "+length*20000);
         if (length <= 0){ return -1;}
@@ -98,17 +97,19 @@ var VetorView =  function(from, to, tipo){
         arrowHelper.line.material.linewidth = 3;
     }
     if(tipo == "E"){
+        var vector_length = to.length();
+        var length = Math.sqrt(to.x * to.x + to.y * to.y + to.z * to.z);
+        length = Math.abs(length);
   	 	if (length <= 1){ return -1;}
         this.cor = 0x4DA6FF;
         length = Math.max(10, length);
         var arrowHelper = new THREE.ArrowHelper(to.normalize(), from, Math.log(length) , this.cor, 1, 0.6 );
         arrowHelper.line.material.linewidth = 3.4;
     }
-
     if(tipo == "W"){
 
         var material = new THREE.LineDashedMaterial({
-            color: 0xffaa00, 
+            color: 0xffff4d, 
             dashSize: 3,
             gapSize: 1,
             linewidth: 2        

@@ -193,7 +193,7 @@ var Cena3D = function(div) {
 
     this.addVetor = function(pInicial, Pfim, tipo){
         // alert("ini: "+pInicial+"fim: "+Pfim+"tipo: "+tipo);
-        obj = new VetorView2(pInicial, Pfim, tipo);
+        obj = new VetorView(pInicial, Pfim, tipo);
         if (obj != -1){
             scene.add(obj);
             vetores.push(obj);

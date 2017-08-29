@@ -468,7 +468,7 @@ function calcWork(i_initial, i_final){
          * remove pI vector
          */
         w = charge_dots[0].carga*(total[0] - total[1]);
-        tela.cena3D.addVetor(charge_dots[0].position.toArray(), charge_dots[1].position.toArray(), "W");
+        tela.cena3D.addVetor(charge_dots[0].position, charge_dots[1].position, "W");
     } else {
         w = 0;
     }
