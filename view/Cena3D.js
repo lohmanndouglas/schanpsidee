@@ -484,7 +484,7 @@ var Cena3D = function(div) {
                 pz: parseFloat(OBJ.position.z).toPrecision(3),
                 rx: parseFloat(OBJ.rotation.x).toPrecision(3),
                 ry: parseFloat(OBJ.rotation.y).toPrecision(3),
-                rz: parseFloat(OBJ.rotation.z,
+                rz: OBJ.rotation.z,
                 cg: OBJ.carga
             }
             switch (OBJ.name) {
