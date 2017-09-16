@@ -479,12 +479,12 @@ var Cena3D = function(div) {
         if (intersectsObjetos.length > 0) {
             OBJ = intersectsObjetos[0].object;
             var menuparams = {
-                px: OBJ.position.x,
-                py: OBJ.position.y,
-                pz: OBJ.position.z,
-                rx: OBJ.rotation.x,
-                ry: OBJ.rotation.y,
-                rz: OBJ.rotation.z,
+                px: parseFloat(OBJ.position.x).toPrecision(3),
+                py: parseFloat(OBJ.position.y).toPrecision(3),
+                pz: parseFloat(OBJ.position.z).toPrecision(3),
+                rx: parseFloat(OBJ.rotation.x).toPrecision(3),
+                ry: parseFloat(OBJ.rotation.y).toPrecision(3),
+                rz: parseFloat(OBJ.rotation.z,
                 cg: OBJ.carga
             }
             switch (OBJ.name) {
